@@ -1,0 +1,25 @@
+{
+  "name": "niche-pages-generator",
+  "version": "1.0.0",
+  "description": "Generador de páginas estáticas de nicho para afiliados de Amazon",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": [
+    "astro",
+    "amazon",
+    "affiliate",
+    "niche"
+  ],
+  "author": "Web Maker",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^4.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

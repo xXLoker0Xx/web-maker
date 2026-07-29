@@ -1,0 +1,463 @@
+---
+// ComparisonTable.astro - Tabla comparativa responsive de productos
+// Permite comparar rápidamente características clave de múltiples productos
+
+interface Product {
+  asin: string;
+  title: string;
+  image_url?: string;
+  price?: string;
+  rating?: number;
+  reviews_count?: number;
+  badge: string;
+  pros: string[];
+  cons: string[];
+  affiliate_url?: string;
+}
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+
+const renderStars = (rating: number) => {
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating % 1 >= 0.5;
+  let stars = '★'.repeat(fullStars);
+  if (hasHalf && fullStars < 5) stars += '½';
+  const emptyStars = 5 - Math.ceil(rating);
+  stars += '☆'.repeat(emptyStars);
+  return stars;
+};
+---
+
+<div class="comparison-container">
+  <div class="table-wrapper">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Valoración</th>
+          <th>Reseñas</th>
+          <th>Insignia</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product) => (
+          <tr class="product-row">
+            <!-- Producto -->
+            <td class="product-cell">
+              <div class="product-info-row">
+                {product.image_url && (
+                  <img
+                    src={product.image_url}
+                    alt={product.title}
+                    class="product-mini-image"
+                    loading="lazy"
+                    width="60"
+                    height="60"
+                  />
+                )}
+                <span class="product-name">{product.title}</span>
+              </div>
+            </td>
+
+            <!-- Precio -->
+            <td class="price-cell">
+              <span class="price-value">{product.price || 'N/A'}</span>
+            </td>
+
+            <!-- Valoración -->
+            <td class="rating-cell">
+              {product.rating && product.rating > 0 ? (
+                <div class="rating-display">
+                  <span class="rating-stars">{renderStars(product.rating)}</span>
+                  <span class="rating-number">{product.rating.toFixed(1)}/5</span>
+                </div>
+              ) : (
+                <span class="no-rating">—</span>
+              )}
+            </td>
+
+            <!-- Reseñas -->
+            <td class="reviews-cell">
+              {product.reviews_count && product.reviews_count > 0 ? (
+                <span class="reviews-number">
+                  {product.reviews_count.toLocaleString('es-ES')}
+                </span>
+              ) : (
+                <span class="no-reviews">—</span>
+              )}
+            </td>
+
+            <!-- Insignia -->
+            <td class="badge-cell">
+              <span class="table-badge">{product.badge}</span>
+            </td>
+
+            <!-- Acción -->
+            <td class="action-cell">
+              <a
+                href={product.affiliate_url || `https://amazon.es/dp/${product.asin}`}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                class="view-link"
+              >
+                Ver →
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile: Tarjetas comparativas -->
+  <div class="mobile-comparison">
+    {products.map((product) => (
+      <div class="comparison-card">
+        <div class="card-header">
+          <h3 class="card-title">{product.title}</h3>
+          <span class="card-badge">{product.badge}</span>
+        </div>
+
+        <div class="card-body">
+          {product.image_url && (
+            <img
+              src={product.image_url}
+              alt={product.title}
+              class="card-image"
+              loading="lazy"
+            />
+          )}
+
+          <div class="card-details">
+            <div class="detail-row">
+              <span class="label">Precio:</span>
+              <span class="value">{product.price || 'N/A'}</span>
+            </div>
+
+            {product.rating && product.rating > 0 && (
+              <div class="detail-row">
+                <span class="label">Valoración:</span>
+                <span class="value">
+                  {renderStars(product.rating)} {product.rating.toFixed(1)}/5
+                </span>
+              </div>
+            )}
+
+            {product.reviews_count && product.reviews_count > 0 && (
+              <div class="detail-row">
+                <span class="label">Reseñas:</span>
+                <span class="value">{product.reviews_count.toLocaleString('es-ES')}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <a
+          href={product.affiliate_url || `https://amazon.es/dp/${product.asin}`}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="card-cta"
+        >
+          Ver Precio en Amazon →
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .comparison-container {
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  /* Desktop Table */
+  .table-wrapper {
+    display: none;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (min-width: 1024px) {
+    .table-wrapper {
+      display: block;
+    }
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+
+  .comparison-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .comparison-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #667eea;
+  }
+
+  .comparison-table td {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+  }
+
+  .comparison-table tbody tr:hover {
+    background-color: #f9fafb;
+  }
+
+  .product-row:last-child td {
+    border-bottom: none;
+  }
+
+  /* Celdas */
+  .product-cell {
+    min-width: 200px;
+  }
+
+  .product-info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .product-mini-image {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 4px;
+  }
+
+  .product-name {
+    font-weight: 500;
+    color: #111827;
+    line-height: 1.3;
+  }
+
+  .price-cell {
+    text-align: center;
+  }
+
+  .price-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #059669;
+  }
+
+  .rating-cell {
+    text-align: center;
+  }
+
+  .rating-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .rating-stars {
+    color: #fbbf24;
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .rating-number {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .no-rating,
+  .no-reviews {
+    color: #d1d5db;
+    font-size: 1.25rem;
+  }
+
+  .reviews-cell {
+    text-align: center;
+  }
+
+  .reviews-number {
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .badge-cell {
+    text-align: center;
+  }
+
+  .table-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .action-cell {
+    text-align: center;
+  }
+
+  .view-link {
+    display: inline-block;
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .view-link:hover {
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  /* Mobile Cards */
+  .mobile-comparison {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .mobile-comparison {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-comparison {
+      display: none;
+    }
+  }
+
+  .comparison-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .comparison-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+  }
+
+  .card-header {
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .card-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 1rem;
+    flex: 1;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+  }
+
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .value {
+    font-weight: 600;
+    color: #111827;
+    text-align: right;
+  }
+
+  .card-cta {
+    display: block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .card-cta:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+</style>
