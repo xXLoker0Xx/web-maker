@@ -1,0 +1,254 @@
+---
+import ProductCard from '../components/ProductCard.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import type { NicheContent } from '../content/config';
+
+interface Props {
+  content: NicheContent;
+  slug: string;
+}
+
+// Generar rutas estáticas para cada JSON en la carpeta content/
+export async function getStaticPaths() {
+  // Leer todos los archivos .json en src/content/
+  const files = import.meta.glob<{ default: NicheContent }>('../content/**/*.json', { 
+    eager: true,
+    import: 'default'
+  });
+
+  return Object.entries(files).map(([path, module]) => {
+    // Extraer nombre de archivo: src/content/freidoras.json -> freidoras
+    const slug = path.split('/').pop()?.replace('.json', '') || 'index';
+    
+    return {
+      params: { slug },
+      props: {
+        content: module,
+        slug: slug
+      }
+    };
+  });
+}
+
+const { content, slug } = Astro.props;
+
+// Meta etiquetas dinámicas
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Meta esenciales -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#667eea" />
+    
+    <!-- SEO -->
+    <title>{content.title}</title>
+    <meta name="description" content={content.description} />
+    <meta property="og:title" content={content.title} />
+    <meta property="og:description" content={content.description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <link rel="canonical" href={canonicalURL} />
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      header {
+        text-align: center;
+        color: white;
+        padding: 60px 20px 40px;
+      }
+      
+      header h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        margin-bottom: 15px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      
+      .affiliate-disclaimer {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px 20px;
+        margin: 30px 0;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #856404;
+      }
+      
+      .intro-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        line-height: 1.8;
+        color: #333;
+      }
+      
+      .intro-section h2 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+      
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+      }
+      
+      .comparison-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      .comparison-section h2 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+      
+      .verdict-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      .verdict-section h2 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+      
+      footer {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 40px 20px;
+        margin-top: 60px;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.8;
+      }
+      
+      .breadcrumb {
+        color: white;
+        padding: 10px 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+      
+      .breadcrumb a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+      @media (max-width: 768px) {
+        header {
+          padding: 40px 20px 30px;
+        }
+        
+        header h1 {
+          font-size: 1.8rem;
+        }
+        
+        .intro-section,
+        .comparison-section,
+        .verdict-section {
+          padding: 25px;
+        }
+        
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">← Volver a inicio</a>
+      </div>
+      
+      <header>
+        <h1>{content.title}</h1>
+        <p>{content.description}</p>
+      </header>
+      
+      <div class="affiliate-disclaimer">
+        <strong>⚠️ Descargo de responsabilidad:</strong> Los enlaces de esta página son enlaces de afiliado. 
+        Si realiza una compra a través de ellos, recibimos una comisión sin costo adicional para usted. 
+        Esto nos ayuda a mantener este sitio.
+      </div>
+      
+      <section class="intro-section">
+        <h2>Introducción</h2>
+        <p>{content.intro}</p>
+      </section>
+      
+      <section class="products-grid">
+        {content.products.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </section>
+      
+      <section class="comparison-section">
+        <h2>Comparativa de Productos</h2>
+        <ComparisonTable products={content.products} />
+      </section>
+      
+      <section class="verdict-section">
+        <h2>Veredicto Final</h2>
+        <p>{content.verdict}</p>
+      </section>
+      
+      <footer>
+        <p><strong>© 2024 Web Maker - Generador de Páginas de Nicho</strong></p>
+        <p>Generas páginas de afiliados automáticamente con IA</p>
+        <p style="margin-top: 15px; opacity: 0.8;">
+          Este sitio participa en programas de afiliados. Recibimos una comisión por las compras realizadas 
+          a través de nuestros enlaces sin costo adicional para el usuario.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

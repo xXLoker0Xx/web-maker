@@ -24,6 +24,27 @@ class WebMakerOrchestrator:
         self.db = ProductDatabase("local_cache.db")
         self.ai_provider = None
         self.amazon_tag = None
+        self.niche_slug = None
+    
+    def _slugify(self, text: str) -> str:
+        """
+        Convert text to URL-safe slug.
+        Example: 'Freidoras de Aire' -> 'freidoras-de-aire'
+        
+        Args:
+            text: Text to convert
+            
+        Returns:
+            Slugified text
+        """
+        import re
+        text = text.lower().strip()
+        text = re.sub(r'[áéíóúñ]', lambda m: {
+            'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ñ': 'n'
+        }[m.group()], text)
+        text = re.sub(r'[^a-z0-9]+', '-', text)
+        text = text.strip('-')
+        return text
         
     def _setup_ai(self) -> bool:
         """
@@ -289,6 +310,7 @@ class WebMakerOrchestrator:
             
             # Get input
             input_type, data, niche = self._get_search_input()
+            self.niche_slug = self._slugify(niche)
             
             # Scrape
             if skip_scraping:
@@ -314,8 +336,10 @@ class WebMakerOrchestrator:
             # Merge
             merged_content = self.merge_content(products, ai_content)
             
-            # Save
-            astro_content_path = Path(__file__).parent.parent / "plantilla-astro" / "src" / "content" / "niche.json"
+            # Save (with niche-based filename for multi-page support)
+            content_dir = Path(__file__).parent.parent / "plantilla-astro" / "src" / "content"
+            filename = f"{self.niche_slug}.json"
+            astro_content_path = content_dir / filename
             success = self.save_output(merged_content, str(astro_content_path))
             
             if success:

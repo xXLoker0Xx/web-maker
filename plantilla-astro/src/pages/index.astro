@@ -1,336 +1,100 @@
 ---
-import ProductCard from '../components/ProductCard.astro';
-import ComparisonTable from '../components/ComparisonTable.astro';
-
-// Importar datos dinámicamente
 import type { NicheContent } from '../content/config';
 
-let content: NicheContent;
+// Cargar todos los JSONs en src/content/
+const files = import.meta.glob<{ default: NicheContent }>('../content/**/*.json', { 
+  eager: true,
+  import: 'default'
+});
 
-try {
-  // Intentar cargar el archivo JSON generado por el motor
-  const response = await fetch('src/content/niche.json');
-  if (!response.ok) throw new Error('Archivo no encontrado');
-  content = await response.json();
-} catch (error) {
-  // Contenido de demostración si el archivo no existe
-  content = {
-    title: 'Las Mejores Freidoras de Aire de 2024',
-    description: 'Análisis completo y comparativa de las mejores freidoras de aire del mercado. Descubre cuál es la mejor opción para ti.',
-    intro: 'Las freidoras de aire se han convertido en un electrodoméstico imprescindible en las cocinas modernas. En esta guía completa, analizamos las mejores opciones disponibles en el mercado, considerando características, precio y opiniones de usuarios.',
-    verdict: 'Basándonos en nuestro análisis, todas estas freidoras de aire son excelentes opciones que cumplen con estándares de calidad. La elección definitiva dependerá de tus necesidades específicas y presupuesto.',
-    products: [
-      {
-        asin: 'B08ABC123',
-        title: 'Freidora de Aire Premium XL',
-        price: '89,99€',
-        rating: 4.8,
-        reviews_count: 1250,
-        badge: 'Mejor Valoración',
-        pros: ['Gran capacidad (6L)', 'Control de temperatura preciso', 'Bajo consumo energético'],
-        cons: ['Algo voluminosa', 'Manual en inglés'],
-        summary: 'La mejor freidora de aire si buscas capacidad y rendimiento. Con su capacidad de 6 litros y control digital inteligente, es perfecta para familias numerosas.',
-        image_url: 'https://m.media-amazon.com/images/I/31ey6WQPQ7L.jpg',
-        affiliate_url: 'https://amazon.es/dp/B08ABC123?tag=tu-tag'
-      },
-      {
-        asin: 'B08XYZ456',
-        title: 'Freidora Compacta Económica',
-        price: '39,99€',
-        rating: 4.2,
-        reviews_count: 892,
-        badge: 'Mejor Precio',
-        pros: ['Muy económica', 'Tamaño compacto', 'Fácil de limpiar'],
-        cons: ['Capacidad limitada', 'Menos funciones'],
-        summary: 'La mejor opción para presupuestos ajustados. Pequeña pero funcional, ideal para parejas o personas que viven solas.',
-        image_url: 'https://m.media-amazon.com/images/I/31ey6WQPQ7L.jpg',
-        affiliate_url: 'https://amazon.es/dp/B08XYZ456?tag=tu-tag'
-      },
-      {
-        asin: 'B09DEF789',
-        title: 'Freidora Inteligente WiFi',
-        price: '129,99€',
-        rating: 4.6,
-        reviews_count: 456,
-        badge: 'Mejor Tecnología',
-        pros: ['Control por app', 'Recetas preprogramadas', 'Muy versátil'],
-        cons: ['Más cara', 'Requiere conexión WiFi'],
-        summary: 'Para los amantes de la tecnología. Controla tu freidora desde el móvil y disfruta de recetas automáticas inteligentes.',
-        image_url: 'https://m.media-amazon.com/images/I/31ey6WQPQ7L.jpg',
-        affiliate_url: 'https://amazon.es/dp/B09DEF789?tag=tu-tag'
-      }
-    ]
+const nichesArray = Object.entries(files).map(([path, module]) => {
+  const filename = path.split('/').pop() || '';
+  const slug = filename.replace('.json', '');
+  return {
+    slug,
+    title: module.title,
+    description: module.description,
+    count: module.products ? module.products.length : 0
   };
-}
+});
 
-// Meta etiquetas dinámicas
+const totalNiches = nichesArray.length;
+const totalProducts = nichesArray.reduce((sum, n) => sum + n.count, 0);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <!-- Meta esenciales -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#667eea" />
-    
-    <!-- SEO -->
-    <title>{content.title}</title>
-    <meta name="description" content={content.description} />
-    <meta name="keywords" content="análisis, comparativa, productos, Amazon" />
-    <link rel="canonical" href={canonicalURL} />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content={content.title} />
-    <meta property="og:description" content={content.description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={content.title} />
-    <meta name="twitter:description" content={content.description} />
-    
-    <!-- Estilos globales -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background: #ffffff;
-        color: #1f2937;
-        line-height: 1.6;
-      }
-
-      /* Contenedor principal */
-      main {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      /* Header */
-      .header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 3rem 1rem;
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .header h1 {
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
-        margin-bottom: 1rem;
-        font-weight: 700;
-        line-height: 1.2;
-      }
-
-      .header p {
-        font-size: 1.1rem;
-        opacity: 0.95;
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
-      /* Sección de introducción */
-      .intro-section {
-        background: #f9fafb;
-        padding: 2rem 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 3rem;
-      }
-
-      .intro-section p {
-        color: #4b5563;
-        font-size: 1.05rem;
-        line-height: 1.8;
-        margin-bottom: 1rem;
-      }
-
-      .intro-section p:last-child {
-        margin-bottom: 0;
-      }
-
-      /* Grid de productos */
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-      }
-
-      @media (max-width: 768px) {
-        .products-grid {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-      }
-
-      /* Sección de veredicto */
-      .verdict-section {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-        padding: 2rem 1.5rem;
-        border-radius: 12px;
-        border-left: 4px solid #667eea;
-        margin-bottom: 3rem;
-      }
-
-      .verdict-section h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: #667eea;
-      }
-
-      .verdict-section p {
-        color: #4b5563;
-        font-size: 1.05rem;
-        line-height: 1.8;
-      }
-
-      /* Footer */
-      .footer {
-        background: #1f2937;
-        color: white;
-        padding: 2rem 1rem;
-        text-align: center;
-        border-top: 1px solid #374151;
-        margin-top: 4rem;
-      }
-
-      .footer p {
-        margin-bottom: 1rem;
-        font-size: 0.95rem;
-        opacity: 0.8;
-      }
-
-      .footer p:last-child {
-        margin-bottom: 0;
-      }
-
-      .affiliate-notice {
-        background: #fef3c7;
-        border-left: 4px solid #f59e0b;
-        padding: 1rem 1.25rem;
-        margin-bottom: 1.5rem;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        color: #78350f;
-      }
-
-      .affiliate-notice strong {
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-
-      /* Animaciones */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .intro-section,
-      .products-grid,
-      .verdict-section {
-        animation: fadeInUp 0.6s ease-out;
-      }
-
-      /* Responsive */
-      @media (max-width: 640px) {
-        .header {
-          padding: 2rem 1rem;
-          margin-bottom: 2rem;
-        }
-
-        .header h1 {
-          font-size: 1.5rem;
-          margin-bottom: 0.75rem;
-        }
-
-        .header p {
-          font-size: 1rem;
-        }
-
-        main {
-          padding: 0 0.75rem;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <h1>{content.title}</h1>
-      <p>{content.description}</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Maker - Páginas de Nicho para Afiliados</title>
+  <meta name="description" content="Guías de compra de nichos específicos de Amazon. Análisis detallados y comparativas de productos recomendados.">
+  <link rel="canonical" href={canonicalURL}>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { text-align: center; color: white; padding: 60px 20px 40px; }
+    header h1 { font-size: 2.5rem; margin-bottom: 15px; }
+    header p { font-size: 1.1rem; opacity: 0.95; }
+    .stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+    .stat { background: rgba(255, 255, 255, 0.1); padding: 20px 30px; border-radius: 8px; color: white; }
+    .stat-number { font-size: 2rem; font-weight: 700; }
+    .content { background: white; padding: 40px; border-radius: 12px; margin: 40px 0; }
+    .content h2 { color: #667eea; margin-bottom: 20px; font-size: 1.8rem; }
+    .niches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+    .niche-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; text-decoration: none; transition: transform 0.3s; }
+    .niche-card:hover { transform: translateY(-8px); }
+    .niche-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .niche-card p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px; }
+    .niche-card .meta { font-size: 0.85rem; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+    .empty { text-align: center; padding: 60px 20px; color: #666; }
+    footer { background: rgba(0, 0, 0, 0.8); color: white; padding: 40px 20px; margin-top: 60px; text-align: center; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 Web Maker</h1>
+      <p>Guías de compra de nichos para afiliados de Amazon</p>
     </header>
-
-    <main>
-      <!-- Aviso de afiliado -->
-      <div class="affiliate-notice">
-        <strong>⚠️ Aviso de Afiliado:</strong>
-        Este sitio contiene enlaces de afiliados de Amazon. Cuando compres a través de estos enlaces, ganamos una pequeña comisión sin costo adicional para ti.
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">{totalNiches}</div>
+        <div>Nichos</div>
       </div>
-
-      <!-- Sección de introducción -->
-      <section class="intro-section">
-        <p>{content.intro}</p>
-      </section>
-
-      <!-- Tabla comparativa (desktop) / Cards (mobile) -->
-      <ComparisonTable products={content.products} />
-
-      <!-- Grid de tarjetas de productos -->
-      <section class="products-grid">
-        {content.products.map((product) => (
-          <ProductCard
-            asin={product.asin}
-            title={product.title}
-            image_url={product.image_url}
-            price={product.price}
-            rating={product.rating}
-            reviews_count={product.reviews_count}
-            badge={product.badge}
-            pros={product.pros}
-            cons={product.cons}
-            summary={product.summary}
-            affiliate_url={product.affiliate_url}
-          />
-        ))}
-      </section>
-
-      <!-- Sección de veredicto -->
-      <section class="verdict-section">
-        <h2>Nuestro Veredicto</h2>
-        <p>{content.verdict}</p>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <p>
-        © {new Date().getFullYear()} - Análisis y Comparativas de Productos
-      </p>
-      <p>
-        <strong>Descargo Legal:</strong> Este sitio es un participante del Programa de Asociados de Amazon Services LLC. Recibimos comisiones por compras calificadas.
-      </p>
-      <p>
-        Los precios y disponibilidad están sujetos a cambios sin previo aviso. Consulta Amazon para los detalles más actualizados.
-      </p>
+      <div class="stat">
+        <div class="stat-number">{totalProducts}</div>
+        <div>Productos</div>
+      </div>
+    </div>
+    
+    <div class="content">
+      <h2>Explora Nuestros Nichos</h2>
+      {nichesArray.length > 0 ? (
+        <div class="niches-grid">
+          {nichesArray.map((niche) => (
+            <a href={'/' + niche.slug + '/'} class="niche-card">
+              <h3>{niche.title}</h3>
+              <p>{niche.description}</p>
+              <div class="meta">📦 {niche.count} productos</div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="empty">
+          <h3>📋 Sin nichos aún</h3>
+          <p>Ejecuta <code>python main.py</code> para generar tu primera página</p>
+        </div>
+      )}
+    </div>
+    
+    <footer>
+      <p><strong>© 2024 Web Maker</strong></p>
+      <p>Generador de páginas de nicho con IA</p>
     </footer>
-  </body>
+  </div>
+</body>
 </html>

@@ -27,6 +27,12 @@ Si es tu primera vez:
 | **[SETUP.md](SETUP.md)** | Configuración paso a paso de APIs y variables de entorno |
 | **[OLLAMA_SETUP.md](OLLAMA_SETUP.md)** | Guía completa de LLM local sin costos de API |
 
+### 🚀 Sistema Multi-Página (NUEVO)
+
+| Archivo | Descripción |
+|---------|-------------|
+| **[MULTI_PAGE.md](MULTI_PAGE.md)** | Cómo generar múltiples páginas en diferentes rutas |
+
 ### 🏗️ Arquitectura y Diseño
 
 | Archivo | Descripción |
