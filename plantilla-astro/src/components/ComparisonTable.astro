@@ -34,9 +34,9 @@ const renderStars = (rating: number) => {
 };
 ---
 
-<div class="comparison-wrapper">
+<div class="comparison-wrapper" id="comparisonWrapper">
   <!-- Desktop: Tabla horizontal compacta -->
-  <div class="comparison-table-container">
+  <div class="comparison-table-container" id="tableContainer">
     <table class="quick-comparison">
       <thead>
         <tr>
@@ -153,7 +153,7 @@ const renderStars = (rating: number) => {
   </div>
 
   <!-- Mobile: Comparativa horizontal scrolleable -->
-  <div class="mobile-comparison-scroll">
+  <div class="mobile-comparison-scroll" id="mobileScroll">
     <div class="scroll-container">
       {products.map((product) => (
         <div class="comparison-card-mobile">
@@ -223,6 +223,39 @@ const renderStars = (rating: number) => {
   </div>
 </div>
 
+<script>
+  function toggleComparisonView() {
+    const wrapper = document.getElementById('comparisonWrapper');
+    const tableContainer = document.getElementById('tableContainer');
+    const mobileScroll = document.getElementById('mobileScroll');
+    
+    if (!wrapper || !tableContainer || !mobileScroll) return;
+    
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        tableContainer.style.display = 'block';
+        mobileScroll.style.display = 'none';
+      } else {
+        tableContainer.style.display = 'none';
+        mobileScroll.style.display = 'block';
+      }
+    };
+    
+    // Initial check
+    handleResize();
+    
+    // Listen for resize events
+    window.addEventListener('resize', handleResize);
+  }
+  
+  // Run when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', toggleComparisonView);
+  } else {
+    toggleComparisonView();
+  }
+</script>
+
 <style>
   .comparison-wrapper {
     width: 100%;
@@ -234,27 +267,12 @@ const renderStars = (rating: number) => {
     overflow-x: auto;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: block;
   }
 
-  /* Ocultar tabla en móvil */
-  @media (max-width: 1023px) {
-    .comparison-table-container {
-      display: none !important;
-    }
-  }
-
-  /* Mostrar scroll en móvil */
-  @media (max-width: 1023px) {
-    .mobile-comparison-scroll {
-      display: block !important;
-    }
-  }
-
-  /* Ocultar scroll en desktop */
-  @media (min-width: 1024px) {
-    .mobile-comparison-scroll {
-      display: none !important;
-    }
+  /* Mobile: Scroll horizontal */
+  .mobile-comparison-scroll {
+    display: block;
   }
 
   .quick-comparison {
