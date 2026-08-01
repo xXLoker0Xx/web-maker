@@ -223,37 +223,38 @@ const renderStars = (rating: number) => {
   </div>
 </div>
 
-<script>
-  function toggleComparisonView() {
-    const wrapper = document.getElementById('comparisonWrapper');
-    const tableContainer = document.getElementById('tableContainer');
-    const mobileScroll = document.getElementById('mobileScroll');
+<script is:inline>
+  // Immediately toggle comparison view based on viewport
+  (function() {
+    function toggleComparisonView() {
+      const tableContainer = document.getElementById('tableContainer');
+      const mobileScroll = document.getElementById('mobileScroll');
+      
+      if (!tableContainer || !mobileScroll) return;
+      
+      const handleResize = () => {
+        const isDesktop = window.innerWidth >= 1024;
+        tableContainer.style.display = isDesktop ? 'block' : 'none';
+        mobileScroll.style.display = isDesktop ? 'none' : 'block';
+      };
+      
+      // Initial check
+      handleResize();
+      
+      // Listen for resize events
+      window.addEventListener('resize', handleResize);
+      
+      // Force check on visibility change (for tabs/windows)
+      document.addEventListener('visibilitychange', handleResize);
+    }
     
-    if (!wrapper || !tableContainer || !mobileScroll) return;
-    
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        tableContainer.style.display = 'block';
-        mobileScroll.style.display = 'none';
-      } else {
-        tableContainer.style.display = 'none';
-        mobileScroll.style.display = 'block';
-      }
-    };
-    
-    // Initial check
-    handleResize();
-    
-    // Listen for resize events
-    window.addEventListener('resize', handleResize);
-  }
-  
-  // Run when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', toggleComparisonView);
-  } else {
-    toggleComparisonView();
-  }
+    // Run immediately when script loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', toggleComparisonView);
+    } else {
+      toggleComparisonView();
+    }
+  })();
 </script>
 
 <style>
