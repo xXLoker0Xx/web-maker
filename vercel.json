@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd plantilla-astro && npm install && npm run build",
-  "outputDirectory": "plantilla-astro/dist",
-  "installCommand": "npm install"
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "root": "plantilla-astro"
 }
