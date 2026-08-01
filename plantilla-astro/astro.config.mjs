@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   // Configuración general
   site: 'https://example.com',
+  output: 'static', // SSG: Static Site Generation
   
   // Soporte para componentes que usan JSX
   vite: {
