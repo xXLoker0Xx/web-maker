@@ -2,31 +2,35 @@
 import ProductCard from '../components/ProductCard.astro';
 import ComparisonTable from '../components/ComparisonTable.astro';
 import type { NicheContent } from '../content/config';
+import fs from 'fs';
+import path from 'path';
 
 interface Props {
   content: NicheContent;
   slug: string;
 }
 
-// Generar rutas estáticas para cada JSON en la carpeta content/niches/
+// Generar rutas estáticas leyendo directamente los archivos JSON
 export async function getStaticPaths() {
   try {
-    // Usar import.meta.glob para obtener todos los archivos JSON
-    const files = import.meta.glob<any>('../content/niches/*.json', { 
-      eager: true,
-    });
-
-    if (!files || Object.keys(files).length === 0) {
+    const nichesDir = path.join(process.cwd(), 'src', 'content', 'niches');
+    
+    if (!fs.existsSync(nichesDir)) {
+      console.warn('Directorio niches no encontrado:', nichesDir);
+      return [];
+    }
+    
+    const files = fs.readdirSync(nichesDir).filter(f => f.endsWith('.json'));
+    
+    if (!files || files.length === 0) {
+      console.warn('No se encontraron archivos JSON en:', nichesDir);
       return [];
     }
 
-    const paths = Object.entries(files).map(([path, module]) => {
-      const slug = path.split('/').pop()?.replace('.json', '') || 'index';
-      const content = module.default || module;
-      
-      if (!content) {
-        return null;
-      }
+    const paths = files.map((file) => {
+      const slug = file.replace('.json', '');
+      const filePath = path.join(nichesDir, file);
+      const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
       
       return {
         params: { slug },
@@ -35,10 +39,12 @@ export async function getStaticPaths() {
           slug: slug
         }
       };
-    }).filter(Boolean);
+    });
     
+    console.log(`Generadas ${paths.length} rutas estáticas desde JSON`);
     return paths;
   } catch (error) {
+    console.error('Error en getStaticPaths:', error);
     return [];
   }
 }

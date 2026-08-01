@@ -1,6 +1,34 @@
-// Archivo de configuración para el contenido dinámico de nicho
-// Este archivo es opcional, principalmente para validación de tipos en TypeScript
+import { defineCollection, z } from 'astro:content';
 
+// Definir la colección 'niches'
+const nichesCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    intro: z.string(),
+    verdict: z.string(),
+    products: z.array(z.object({
+      asin: z.string(),
+      badge: z.string(),
+      pros: z.array(z.string()).optional(),
+      cons: z.array(z.string()).optional(),
+      summary: z.string(),
+      image_url: z.string().optional(),
+      price: z.string().optional(),
+      rating: z.number().optional(),
+      reviews_count: z.number().optional(),
+      affiliate_url: z.string().optional(),
+    })),
+  }),
+});
+
+// Exportar colecciones
+export const collections = {
+  niches: nichesCollection,
+};
+
+// Tipos TypeScript para referencia
 export interface NicheContent {
   title: string;
   description: string;
