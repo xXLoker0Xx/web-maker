@@ -230,16 +230,30 @@ const renderStars = (rating: number) => {
 
   /* Desktop: Tabla horizontal */
   .comparison-table-container {
-    display: none;
     width: 100%;
     overflow-x: auto;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
 
-  @media (min-width: 1024px) {
+  /* Ocultar tabla en móvil */
+  @media (max-width: 1023px) {
     .comparison-table-container {
-      display: block;
+      display: none !important;
+    }
+  }
+
+  /* Mostrar scroll en móvil */
+  @media (max-width: 1023px) {
+    .mobile-comparison-scroll {
+      display: block !important;
+    }
+  }
+
+  /* Ocultar scroll en desktop */
+  @media (min-width: 1024px) {
+    .mobile-comparison-scroll {
+      display: none !important;
     }
   }
 
@@ -433,12 +447,6 @@ const renderStars = (rating: number) => {
   /* Mobile: Scroll horizontal */
   .mobile-comparison-scroll {
     display: block;
-  }
-
-  @media (min-width: 1024px) {
-    .mobile-comparison-scroll {
-      display: none;
-    }
   }
 
   .scroll-container {
