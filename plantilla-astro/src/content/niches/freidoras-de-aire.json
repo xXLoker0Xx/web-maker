@@ -1,122 +1,114 @@
 {
-  "title": "Los 5 mejores productos en freidoras de aire de 2026",
-  "description": "Descubre las mejores opciones en freidoras de aire. Análisis completo y comparativa de productos.",
-  "intro": "En este artículo te presentamos un análisis detallado de los mejores productos en freidoras de aire.",
-  "verdict": "Después de analizar estas opciones, cualquiera de estos productos en freidoras de aire es una excelente opción según tus necesidades específicas.",
+  "title": "Las 5 Mejores Freidoras de Aire de 2026",
+  "description": "Encuentra la mejor freidora de aire para tu hogar en nuestra guía comparativa SEO. Comparamos las mejores opciones en función de capacidad, consumo energético, facilidad de limpieza y más.",
+  "buying_criteria": [
+    "Capacidad y tamaño",
+    "Temperatura máxima",
+    "Consumo energético",
+    "Facilidad de limpieza",
+    "Accesorios incluidos"
+  ],
+  "intro": "Eres fanático de la comida frita pero buscas una opción más saludable? Una freidora de aire puede ser exactamente lo que necesitas. En este artículo, te compararemos las 5 mejores freidoras de aire del mercado para ayudarte a encontrar la perfecta.",
+  "verdict": "Una freidora de aire es una herramienta esencial para cualquier cocinero saludista. A continuación, te recomendamos las mejores opciones en el mercado actual:",
   "products": [
     {
       "asin": "B0G7HSS6JP",
-      "title": "Cecotec Freidora de Aire 6,5 L Cecofry&Grill Duoheat 6500 Grill | Doble Resistencia para Dorado Perfecto, Sabor de Parrilla en Carnes, Potencia de 2200 W, Platos Saludables, Air Fryer, Pizzas",
+      "short_title": "Cecotec Freidora de Aire Duoheat",
+      "badge": "Mejor Calidad-Precio",
+      "pros": [
+        "Doble resistencia para un dorado perfecto",
+        "Soporta 8 modos",
+        "Tiempo ajustable"
+      ],
+      "cons": [
+        "No tiene calificación en Amazon",
+        "No se especifica el consumo energético"
+      ],
+      "summary": "La Cecotec Freidora de Aire Duoheat es una excelente opción si estás buscando una freidora de aire con una buena relación calidad-precio.",
       "image_url": "https://m.media-amazon.com/images/I/71qEef7KxUL._AC_UL320_.jpg",
       "price": "54,",
       "rating": 0.0,
       "reviews_count": 0,
-      "badge": "Mejor Calidad",
-      "pros": [
-        "Capacidad de 6,5L ideal para familias",
-        "Doble resistencia para dorado perfecto",
-        "Potencia de 2200W muy eficiente",
-        "Versátil: aire y grill integrado",
-        "Tecnología de calentamiento rápido"
-      ],
-      "cons": [
-        "Precio medio-alto",
-        "Requiere espacio considerable en la cocina",
-        "Tiempos de calentamiento: 3-5 minutos"
-      ],
-      "summary": "Cecotec Freidora de Aire 6,5 L Cecofry&Grill Duoheat 6500 Grill | Doble Resistencia para Dorado Perfecto, Sabor de Parrilla en Carnes, Potencia de 2200 W, Platos Saludables, Air Fryer, Pizzas - Precio: 54,€. Sin reseñas aún y sin valoración aún.",
       "affiliate_url": "https://amazon.es/dp/B0G7HSS6JP?tag=tu-tag-20"
     },
     {
       "asin": "B0BFB3Q7SD",
-      "title": "Cecotec Freidora sin Aceite de 5,5 L de Aire Caliente Cecofry Full InoxBlack 5500 Pro. 1700 W, Dietética y Digital, Panel Táctil, Acabados en Acero Inox, Tecnología PerfectCook, Termostato, 8 Modos | 1700 W, Dietética y Digital, Panel Táctil, Acabados en Acero Inox, Tecnología PerfectCook, Termostato, 8 Modos",
+      "short_title": "Cecotec Freidora sin Aceite InoxBlack 5500 Pro",
+      "badge": "Mejor Rendimiento",
+      "pros": [
+        "Tiene un panel táctil y tecnología PerfectCook",
+        "Soporta 8 modos",
+        "Acabados en acero inoxidable"
+      ],
+      "cons": [
+        "No tiene calificación en Amazon",
+        "Consumo energético no especificado"
+      ],
+      "summary": "La Cecotec Freidora sin Aceite InoxBlack 5500 Pro es una excelente opción si estás buscando una freidora de aire con un rendimiento superior.",
       "image_url": "https://m.media-amazon.com/images/I/519AN1zQmbL._AC_UL320_.jpg",
       "price": "49,",
       "rating": 0.0,
       "reviews_count": 0,
-      "badge": "Mejor Precio",
-      "pros": [
-        "Precio muy competitivo del mercado",
-        "Panel táctil digital intuitivo",
-        "Acabados en acero inoxidable premium",
-        "Tecnología PerfectCook patentada",
-        "8 modos de cocción diferentes"
-      ],
-      "cons": [
-        "Capacidad algo reducida (5,5L)",
-        "Menos potencia que modelos premium",
-        "Mantenimiento regular de accesorios"
-      ],
-      "summary": "Cecotec Freidora sin Aceite de 5,5 L de Aire Caliente Cecofry Full InoxBlack 5500 Pro. 1700 W, Dietética y Digital, Panel Táctil, Acabados en Acero Inox, Tecnología PerfectCook, Termostato, 8 Modos | 1700 W, Dietética y Digital, Panel Táctil, Acabados en Acero Inox, Tecnología PerfectCook, Termostato, 8 Modos - Precio: 49,€. Sin reseñas aún y sin valoración aún.",
       "affiliate_url": "https://amazon.es/dp/B0BFB3Q7SD?tag=tu-tag-20"
     },
     {
       "asin": "B0GXKV5YSD",
-      "title": "Cecotec Freidora de Aire 8 L Cecofry&Grill Duoheat 8000 Hot 2200W | Doble Grill Integrado, Dorado Perfecto en Carnes, Sabor de Parrilla, Platos Saludables, Temperatura entre 80-200°C, 8 Menús",
+      "short_title": "Cecotec Freidora de Aire Duoheat 8000 Hot",
+      "badge": "Mejor en Capacidad",
+      "pros": [
+        "Tiene una gran capacidad de 8 litros",
+        "Integra un grill doble",
+        "Soporta 8 menús"
+      ],
+      "cons": [
+        "No tiene calificación en Amazon",
+        "Consumo energético no especificado"
+      ],
+      "summary": "Si necesitas una freidora de aire con gran capacidad, la Cecotec Freidora de Aire Duoheat 8000 Hot es una excelente opción.",
       "image_url": "https://m.media-amazon.com/images/I/81-HUxYcjrL._AC_UL320_.jpg",
       "price": "69,",
       "rating": 0.0,
       "reviews_count": 0,
-      "badge": "Mejor Rendimiento",
-      "pros": [
-        "Capacidad generosa de 8L",
-        "Grill doble integrado profesional",
-        "Control fino de temperatura (80-200°C)",
-        "Perfecto para cocina completa",
-        "8 menús pre-programados automáticos"
-      ],
-      "cons": [
-        "Precio elevado en comparación",
-        "Consumo eléctrico más alto",
-        "Requiere muy buen ventilado"
-      ],
-      "summary": "Cecotec Freidora de Aire 8 L Cecofry&Grill Duoheat 8000 Hot 2200W | Doble Grill Integrado, Dorado Perfecto en Carnes, Sabor de Parrilla, Platos Saludables, Temperatura entre 80-200°C, 8 Menús - Precio: 69,€. Sin reseñas aún y sin valoración aún.",
       "affiliate_url": "https://amazon.es/dp/B0GXKV5YSD?tag=tu-tag-20"
     },
     {
       "asin": "B0BQ1DJ65N",
-      "title": "Cecotec Freidora de Aire de 4 L con Ventana Cecofry Fantastik Window 4000 | 1400W, Tecnología PerfectCook, 9 Menús, Termostato Regulable 80-200ºC, Tiempo Ajustable, Protección contra Sobrecalentamiento",
+      "short_title": "Cecotec Fantastik Window 4000",
+      "badge": "Mejor en Tecnología PerfectCook",
+      "pros": [
+        "Tiene tecnología PerfectCook y un termostato regulable",
+        "Soporta 9 menús",
+        "Tiempo ajustable"
+      ],
+      "cons": [
+        "No tiene calificación en Amazon",
+        "Consumo energético no especificado"
+      ],
+      "summary": "La Cecotec Fantastik Window 4000 es una excelente opción si estás buscando una freidora de aire con tecnología PerfectCook.",
       "image_url": "https://m.media-amazon.com/images/I/51SmikZCEcL._AC_UL320_.jpg",
       "price": "38,",
       "rating": 0.0,
       "reviews_count": 0,
-      "badge": "Mejor Versátil",
-      "pros": [
-        "Excelente relación precio-capacidad",
-        "Rápido tiempo de cocción",
-        "Acabado moderno y compacto",
-        "Bajo consumo de energía",
-        "Garantía extendida de 3 años"
-      ],
-      "cons": [
-        "Capacidad más pequeña (4,5L)",
-        "Una sola resistencia térmica",
-        "Menor número de funciones"
-      ],
-      "summary": "Cecotec Freidora de Aire de 4 L con Ventana Cecofry Fantastik Window 4000 | 1400W, Tecnología PerfectCook, 9 Menús, Termostato Regulable 80-200ºC, Tiempo Ajustable, Protección contra Sobrecalentamiento - Precio: 38,€. Sin reseñas aún y sin valoración aún.",
       "affiliate_url": "https://amazon.es/dp/B0BQ1DJ65N?tag=tu-tag-20"
     },
     {
       "asin": "B07N8N6C85",
-      "title": "Cosori Freidora de Aire 5,7L, Interior Metálico, 11 Modos, 97% Sin Aceite | Rápido y Eficiente, Tecnología Calentamiento Uniforme, Diseño Duradero, 40 Recetas en Español, Apto para Lavavajillas, 1700W",
+      "short_title": "Cosori Freidora de Aire 5,7L",
+      "badge": "Mejor en Diseño Duradero",
+      "pros": [
+        "Tiene un diseño duradero y tecnología calentamiento uniforme",
+        "Soporta 11 modos",
+        "Apto para lavavajillas"
+      ],
+      "cons": [
+        "No tiene calificación en Amazon",
+        "Consumo energético no especificado"
+      ],
+      "summary": "La Cosori Freidora de Aire es una excelente opción si estás buscando una freidora de aire con un diseño duradero.",
       "image_url": "https://m.media-amazon.com/images/I/712pqfyIq5L._AC_UL320_.jpg",
       "price": "84,",
       "rating": 0.0,
       "reviews_count": 0,
-      "badge": "Alternativa Recomendada",
-      "pros": [
-        "Precio muy accesible",
-        "Fácil de limpiar y mantener",
-        "Tamaño portable y versátil",
-        "Buena opinión de usuarios verificados",
-        "Entrega rápida disponible"
-      ],
-      "cons": [
-        "Menos características premium",
-        "Capacidad limitada para familias",
-        "Mantenimiento más frecuente requerido"
-      ],
-      "summary": "Cosori Freidora de Aire 5,7L, Interior Metálico, 11 Modos, 97% Sin Aceite | Rápido y Eficiente, Tecnología Calentamiento Uniforme, Diseño Duradero, 40 Recetas en Español, Apto para Lavavajillas, 1700W - Precio: 84,€. Sin reseñas aún y sin valoración aún.",
       "affiliate_url": "https://amazon.es/dp/B07N8N6C85?tag=tu-tag-20"
     }
   ],
@@ -125,7 +117,9 @@
     "total_scraped": 48,
     "products_selected": 5,
     "created_at": "2026-08-01T20:05:47.559641",
-    "step": "1_scraping_only",
-    "next_step": "Run Step 2 (AI Analysis) to add pros/cons and improve content"
+    "step": "2_ai_analysis",
+    "next_step": "Run Step 2 (AI Analysis) to add pros/cons and improve content",
+    "ai_provider": "AIContentGenerator",
+    "enriched": true
   }
 }

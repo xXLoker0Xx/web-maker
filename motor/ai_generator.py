@@ -108,14 +108,16 @@ Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera d
 {{
   "title": "Las X Mejores [Categoría] de 2026",
   "description": "Meta descripción SEO para la página (max 160 caracteres)",
+  "buying_criteria": ["Criterio 1", "Criterio 2", "Criterio 3", "Criterio 4", "Criterio 5"],
   "intro": "Párrafo introductorio enfocado en conversión (200-300 palabras)",
   "verdict": "Conclusión y recomendación general (150-200 palabras)",
   "products": [
     {{
       "asin": "ASIN_ACTUAL",
+      "short_title": "Título corto diferenciador (max 10 palabras)",
       "badge": "Insignia única como 'Mejor Calidad-Precio' o 'Mejor Rendimiento'",
-      "pros": ["Pro 1", "Pro 2", "Pro 3"],
-      "cons": ["Contra 1", "Contra 2"],
+      "pros": ["Pro 1", "Pro 2", "Pro 3", "Pro 4", "Pro 5"],
+      "cons": ["Contra 1", "Contra 2", "Contra 3"],
       "summary": "Resumen único escrito por la IA (100-150 palabras)"
     }}
   ]
@@ -124,8 +126,10 @@ Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera d
 Reglas:
 - El título debe ser atractivo y contener la palabra clave principal
 - La meta descripción debe incluir la palabra clave y ser atractiva
+- El short_title debe ser diferenciador, corto (max 10 palabras) y único para cada producto
+- buying_criteria: lista con los 5 criterios clave de clasificación
 - Cada producto debe tener una insignia diferente
-- Los pros y contras deben ser específicos al producto y relacionados con los 5 criterios clave
+- Los pros (5) y contras (3) deben ser específicos al producto y relacionados con los 5 criterios clave
 - El resumen debe ser único para cada producto, comparándolo respecto a los criterios clave
 - Usa un tono profesional pero conversacional
 - Incluye información sobre por qué cada producto es una buena compra basándote en los criterios
@@ -205,15 +209,17 @@ Genera un JSON estricto con la siguiente estructura:
 {{
   "title": "Las X Mejores [Categoría] de 2026",
   "description": "Meta descripción SEO para la página (max 160 caracteres)",
+  "buying_criteria": ["Criterio 1", "Criterio 2", "Criterio 3", "Criterio 4", "Criterio 5"],
   "intro": "Párrafo introductorio enfocado en conversión (200-300 palabras)",
   "verdict": "Conclusión y recomendación general (150-200 palabras)",
   "products": [
     {{
       "asin": "ASIN_ACTUAL",
-      "badge": "Insignia única como 'Mejor Calidad-Precio' o 'Mejor Rendimiento'",
-      "pros": ["Pro 1", "Pro 2", "Pro 3"],
-      "cons": ["Contra 1", "Contra 2"],
-      "summary": "Resumen único escrito por la IA (100-150 palabras)"
+      "short_title": "Título corto diferenciador (max 10 palabras)",
+      "badge": "Insignia única como 'Mejor Calidad-Precio'",
+      "pros": ["Pro 1", "Pro 2", "Pro 3", "Pro 4", "Pro 5"],
+      "cons": ["Contra 1", "Contra 2", "Contra 3"],
+      "summary": "Resumen único (100-150 palabras)"
     }}
   ]
 }}
@@ -290,18 +296,20 @@ PRODUCTOS:
 
 {criteria_section}
 
-Responde con este JSON:
+Responde con este JSON (sin texto adicional):
 {{
   "title": "Las X Mejores [Categoría] de 2026",
   "description": "Meta descripción SEO",
+  "buying_criteria": ["Criterio 1", "Criterio 2", "Criterio 3", "Criterio 4", "Criterio 5"],
   "intro": "Párrafo introductorio (200-300 palabras)",
   "verdict": "Conclusión (150-200 palabras)",
   "products": [
     {{
       "asin": "ASIN",
+      "short_title": "Título corto diferenciador",
       "badge": "Insignia única",
-      "pros": ["Pro 1", "Pro 2"],
-      "cons": ["Contra"],
+      "pros": ["Pro 1", "Pro 2", "Pro 3", "Pro 4", "Pro 5"],
+      "cons": ["Contra 1", "Contra 2", "Contra 3"],
       "summary": "Resumen (100-150 palabras)"
     }}
   ]
@@ -398,14 +406,16 @@ Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera d
 {{
   "title": "Las X Mejores [Categoría] de 2026",
   "description": "Meta descripción SEO para la página (max 160 caracteres)",
+  "buying_criteria": ["Criterio 1", "Criterio 2", "Criterio 3", "Criterio 4", "Criterio 5"],
   "intro": "Párrafo introductorio enfocado en conversión (200-300 palabras)",
   "verdict": "Conclusión y recomendación general (150-200 palabras)",
   "products": [
     {{
       "asin": "ASIN_ACTUAL",
+      "short_title": "Título corto diferenciador (max 10 palabras)",
       "badge": "Insignia única como 'Mejor Calidad-Precio' o 'Mejor Rendimiento'",
-      "pros": ["Pro 1", "Pro 2", "Pro 3"],
-      "cons": ["Contra 1", "Contra 2"],
+      "pros": ["Pro 1", "Pro 2", "Pro 3", "Pro 4", "Pro 5"],
+      "cons": ["Contra 1", "Contra 2", "Contra 3"],
       "summary": "Resumen único escrito por la IA (100-150 palabras)"
     }}
   ]
@@ -414,8 +424,10 @@ Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera d
 Reglas:
 - El título debe ser atractivo y contener la palabra clave principal
 - La meta descripción debe incluir la palabra clave y ser atractiva
+- El short_title debe ser diferenciador, corto (max 10 palabras) y único para cada producto
+- buying_criteria: lista con los 5 criterios clave de clasificación
 - Cada producto debe tener una insignia diferente
-- Los pros y contras deben ser específicos al producto y relacionados con los criterios clave
+- Los pros (5) y contras (3) deben ser específicos al producto y relacionados con los 5 criterios clave
 - El resumen debe ser único para cada producto, comparándolo respecto a los criterios
 - Usa un tono profesional pero conversacional
 - Responde ÚNICAMENTE con el JSON, sin explicaciones adicionales."""

@@ -1,0 +1,121 @@
+{
+  "title": "Las 5 Mejores Pelotas de Fútbol de Amazon de 2026",
+  "description": "Encuentra la mejor pelota de fútbol para tus entrenamientos o partidos con nuestra selección de las mejores pelotas de Amazon. Comparativa de calidad-precio, opiniones y más.",
+  "buying_criteria": [
+    "Especificaciones técnicas y características",
+    "Relación calidad-precio",
+    "Opiniones y valoraciones de usuarios",
+    "Durabilidad y garantía",
+    "Facilidad de uso y mantenimiento"
+  ],
+  "intro": "Explora nuestra selección de las mejores pelotas de fútbol en Amazon. Nosotros hemos comparado las especificaciones técnicas, la calidad-precio, opiniones y reseñas de usuarios para ofrecerte la mejor opción según tus necesidades.",
+  "verdict": "Selecciona la mejor pelota de fútbol para ti y tus compañeros en nuestra lista de las mejores pelotas de Amazon. Adquiere ahora para disfrutar de una experiencia de juego inigualable.",
+  "products": [
+    {
+      "asin": "B0FCSCRXTV",
+      "short_title": "Pelota adidas World Cup League Ball",
+      "badge": "Mejor calidad-precio",
+      "pros": [
+        "Cuenta con la insignia de la Copa Mundial",
+        "Diseño atractivo",
+        "Bajo precio"
+      ],
+      "cons": [
+        "No cuenta con reseñas ni calificaciones",
+        "Precio no especificado"
+      ],
+      "summary": "La adidas World Cup League Ball es una buena opción de entrenamiento debido a su bajo precio y diseño atractivo. Sin embargo, carece de reseñas y calificaciones.",
+      "image_url": "https://m.media-amazon.com/images/I/81LukCXCiTL._AC_UL320_.jpg",
+      "price": "32,",
+      "rating": 0.0,
+      "reviews_count": 0,
+      "affiliate_url": "https://amazon.es/dp/B0FCSCRXTV?tag=tu-tag-20"
+    },
+    {
+      "asin": "B091Z48J81",
+      "short_title": "UEFA Champions League Football",
+      "badge": "Mejor para coleccionistas",
+      "pros": [
+        "Se trata de una pelota oficial de la UEFA",
+        "Diseño atractivo",
+        "Buena opción para regalos"
+      ],
+      "cons": [
+        "No cuenta con reseñas ni calificaciones"
+      ],
+      "summary": "La UEFA Champions League Football es una excelente opción si buscas una pelota coleccionable. Es oficial de la UEFA y posee un diseño atractivo, sin embargo, carece de reseñas y calificaciones.",
+      "image_url": "https://m.media-amazon.com/images/I/8152jhd5ZaL._AC_UL320_.jpg",
+      "price": "20,",
+      "rating": 0.0,
+      "reviews_count": 0,
+      "affiliate_url": "https://amazon.es/dp/B091Z48J81?tag=tu-tag-20"
+    },
+    {
+      "asin": "B0DLJD5K46",
+      "short_title": "adidas Copa Mundial Training",
+      "badge": "Mejor rendimiento",
+      "pros": [
+        "Cuenta con la insignia de FIFA",
+        "Buena calidad-precio",
+        "Excelente rendimiento"
+      ],
+      "cons": [
+        "Precio no especificado"
+      ],
+      "summary": "La adidas Copa Mundial Training es una excelente opción para entrenamientos debido a su buena calidad y rendimiento. Sin embargo, carece de un precio específico.",
+      "image_url": "https://m.media-amazon.com/images/I/71FYdVCqWeL._AC_UL320_.jpg",
+      "price": "N/A",
+      "rating": 0.0,
+      "reviews_count": 0,
+      "affiliate_url": "https://amazon.es/dp/B0DLJD5K46?tag=tu-tag-20"
+    },
+    {
+      "asin": "B0FVH638HX",
+      "short_title": "adidas Liga Trionda Finales Copa Mundial",
+      "badge": "Mejor durabilidad",
+      "pros": [
+        "Cuenta con la insignia de FIFA",
+        "Excelente durabilidad",
+        "Buena calidad-precio"
+      ],
+      "cons": [
+        "Precio no especificado"
+      ],
+      "summary": "La adidas Liga Trionda Finales Copa Mundial es una excelente opción debido a su excelente durabilidad y calidad. Sin embargo, carece de un precio específico.",
+      "image_url": "https://m.media-amazon.com/images/I/71rJ4jGwW1L._AC_UL320_.jpg",
+      "price": "N/A",
+      "rating": 0.0,
+      "reviews_count": 0,
+      "affiliate_url": "https://amazon.es/dp/B0FVH638HX?tag=tu-tag-20"
+    },
+    {
+      "asin": "B0CKTG7WK5",
+      "short_title": "PUMA Orbita 6 Ms Pelotas de entrenamiento",
+      "badge": "Mejor para jugadores principiantes",
+      "pros": [
+        "Buena calidad-precio",
+        "Diseño atractivo",
+        "Excelente para jugadores principiantes"
+      ],
+      "cons": [
+        "No cuenta con reseñas ni calificaciones"
+      ],
+      "summary": "Las PUMA Orbita 6 Ms Pelotas de entrenamiento son una buena opción si eres un jugador principal o buscas una pelota atractiva a un bajo precio. Sin embargo, carece de reseñas y calificaciones.",
+      "image_url": "https://m.media-amazon.com/images/I/71WdH32FyOL._AC_UL320_.jpg",
+      "price": "14,",
+      "rating": 0.0,
+      "reviews_count": 0,
+      "affiliate_url": "https://amazon.es/dp/B0CKTG7WK5?tag=tu-tag-20"
+    }
+  ],
+  "_metadata": {
+    "search_term": "Balones de Futbol",
+    "total_scraped": 48,
+    "products_selected": 5,
+    "created_at": "2026-08-01T22:01:01.378916",
+    "step": "2_ai_analysis",
+    "next_step": "Run Step 2 (AI Analysis) to add pros/cons and improve content",
+    "ai_provider": "AIContentGenerator",
+    "enriched": true
+  }
+}
