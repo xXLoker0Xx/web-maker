@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 from database import ProductDatabase
 from scraper import AmazonScraper
 from ai_generator import AIContentGenerator
+from internet_search import get_criteria_finder
 
 
 class WebMakerOrchestrator:
@@ -119,43 +120,36 @@ class WebMakerOrchestrator:
     
     def _get_search_input(self) -> tuple:
         """
-        Get search input from user (search term or ASINs).
+        Get search term from user.
         
         Returns:
-            Tuple of (input_type, data, niche_name)
+            Tuple of (search_term, pages_to_scrape)
         """
         print("\n" + "="*60)
         print("🚀 GENERADOR DE PÁGINAS DE NICHO PARA AFILIADOS DE AMAZON")
         print("="*60)
         
-        print("\nElige un modo de entrada:")
-        print("1. Buscar por término (ej: 'freidoras de aire')")
-        print("2. Por ASINs específicos (ej: 'B08ABC123,B08XYZ456')")
+        search_term = input("\n🔎 Ingresa el término de búsqueda (ej: 'Freidoras de Aire'): ").strip()
+        if not search_term:
+            print("✗ El término de búsqueda no puede estar vacío")
+            sys.exit(1)
         
-        choice = input("\nOpción (1 o 2): ").strip()
+        pages = input("¿Cuántas páginas de resultados deseas (1-3)? (default: 1): ").strip()
+        try:
+            pages = int(pages) if pages else 1
+            pages = min(max(pages, 1), 3)
+        except ValueError:
+            pages = 1
         
-        if choice == "2":
-            asins_input = input("Ingresa los ASINs separados por comas: ").strip()
-            asins = [asin.strip().upper() for asin in asins_input.split(',')]
-            niche = input("¿Cuál es el nicho/categoría de estos productos?: ").strip()
-            return 'asins', asins, niche
-        else:
-            search_term = input("Ingresa el término de búsqueda: ").strip()
-            pages = input("¿Cuántas páginas de resultados deseas (1-3)?: ").strip()
-            try:
-                pages = int(pages)
-                pages = min(max(pages, 1), 3)
-            except ValueError:
-                pages = 1
-            return 'search', search_term, search_term
+        return search_term, pages
 
-    def scrape_and_process(self, input_type: str, data: Any, niche: str) -> List[Dict[str, Any]]:
+    def scrape_and_process(self, search_term: str, num_pages: int, niche: str) -> List[Dict[str, Any]]:
         """
-        Scrape products from Amazon.
+        Scrape products from Amazon search results.
         
         Args:
-            input_type: 'search' or 'asins'
-            data: Search term or list of ASINs
+            search_term: Search term
+            num_pages: Number of pages to scrape
             niche: Niche category name
             
         Returns:
@@ -168,11 +162,7 @@ class WebMakerOrchestrator:
         products = []
         
         with AmazonScraper() as scraper:
-            if input_type == 'search':
-                pages = 1  # Default to 1 page for search
-                products = scraper.scrape_search_results(data, num_pages=pages)
-            else:  # asins
-                products = scraper.scrape_multiple_asins(data)
+            products = scraper.scrape_search_results(search_term, num_pages=num_pages)
         
         if not products:
             print("✗ No se encontraron productos")
@@ -185,13 +175,14 @@ class WebMakerOrchestrator:
         
         return products
 
-    def generate_ai_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_ai_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate AI content for products.
         
         Args:
             products: List of product dictionaries
             niche: Niche category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Generated content or None
@@ -204,7 +195,7 @@ class WebMakerOrchestrator:
             print("✗ Proveedor de IA no configurado")
             return None
         
-        ai_content = self.ai_provider.generate(products, niche)
+        ai_content = self.ai_provider.generate(products, niche, buying_criteria)
         return ai_content
 
     def merge_content(self, products: List[Dict[str, Any]], ai_content: Dict[str, Any]) -> Dict[str, Any]:
@@ -308,9 +299,14 @@ class WebMakerOrchestrator:
             
             self.amazon_tag = self._get_amazon_tag()
             
-            # Get input
-            input_type, data, niche = self._get_search_input()
-            self.niche_slug = self._slugify(niche)
+            # Get search input
+            search_term, num_pages = self._get_search_input()
+            self.niche_slug = self._slugify(search_term)
+            
+            # Find buying criteria from internet
+            criteria_finder = get_criteria_finder()
+            criteria_data = criteria_finder.find_criteria(search_term)
+            buying_criteria = criteria_data.get('criteria', [])
             
             # Scrape
             if skip_scraping:
@@ -318,20 +314,20 @@ class WebMakerOrchestrator:
                 products = self.db.get_all_products()
                 if not products:
                     print("✗ No hay productos en caché")
-                    products = self.scrape_and_process(input_type, data, niche)
+                    products = self.scrape_and_process(search_term, num_pages, search_term)
             else:
-                products = self.scrape_and_process(input_type, data, niche)
+                products = self.scrape_and_process(search_term, num_pages, search_term)
             
             if not products:
                 print("✗ Abortando: No hay productos para procesar")
                 return
             
-            # Generate AI content
-            ai_content = self.generate_ai_content(products, niche)
+            # Generate AI content (with buying criteria)
+            ai_content = self.generate_ai_content(products, search_term, buying_criteria)
             
             if not ai_content:
                 print("⚠️  No se pudo generar contenido con IA, usando datos básicos...")
-                ai_content = self._generate_fallback_content(products, niche)
+                ai_content = self._generate_fallback_content(products, search_term)
             
             # Merge
             merged_content = self.merge_content(products, ai_content)

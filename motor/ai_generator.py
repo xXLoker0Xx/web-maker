@@ -14,7 +14,7 @@ class AIProvider(ABC):
     """Abstract base class for AI providers."""
     
     @abstractmethod
-    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """Generate niche content from products."""
         pass
 
@@ -36,19 +36,21 @@ class OpenAIProvider(AIProvider):
         except ImportError:
             raise ImportError("openai package not installed. Install with: pip install openai")
     
-    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate niche content using OpenAI.
         
         Args:
             products: List of product dictionaries
             niche: Niche topic/category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Content dictionary or None if generation fails
         """
         try:
             products_json = self._format_products_for_prompt(products)
+            criteria_section = self._format_criteria_for_prompt(buying_criteria) if buying_criteria else ""
             
             system_prompt = """Eres un experto en marketing de afiliados de Amazon y contenido SEO.
 Tu tarea es generar análisis de productos de manera profesional y persuasiva.
@@ -59,6 +61,8 @@ IMPORTANTE: Debes responder SIEMPRE con un JSON válido, sin explicaciones adici
 
 PRODUCTOS:
 {products_json}
+
+{criteria_section}
 
 Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera del JSON):
 {{
@@ -81,10 +85,10 @@ Reglas:
 - El título debe ser atractivo y contener la palabra clave principal
 - La meta descripción debe incluir la palabra clave y ser atractiva
 - Cada producto debe tener una insignia diferente
-- Los pros y contras deben ser específicos al producto
-- El resumen debe ser único para cada producto, no copiado de sus características
+- Los pros y contras deben ser específicos al producto y relacionados con los 5 criterios clave
+- El resumen debe ser único para cada producto, comparándolo respecto a los criterios clave
 - Usa un tono profesional pero conversacional
-- Incluye información sobre por qué cada producto es una buena compra
+- Incluye información sobre por qué cada producto es una buena compra basándote en los criterios
 - Responde ÚNICAMENTE con el JSON, sin explicaciones adicionales."""
 
             response = self.client.chat.completions.create(
@@ -159,19 +163,21 @@ class AnthropicProvider(AIProvider):
         except ImportError:
             raise ImportError("anthropic package not installed. Install with: pip install anthropic")
     
-    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate niche content using Claude.
         
         Args:
             products: List of product dictionaries
             niche: Niche topic/category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Content dictionary or None if generation fails
         """
         try:
             products_json = self._format_products_for_prompt(products)
+            criteria_section = self._format_criteria_for_prompt(buying_criteria) if buying_criteria else ""
             
             system_prompt = """Eres un experto en marketing de afiliados de Amazon y contenido SEO.
 Tu tarea es generar análisis de productos de manera profesional y persuasiva.
@@ -181,6 +187,8 @@ Debes responder SIEMPRE con un JSON válido y bien formado."""
 
 PRODUCTOS:
 {products_json}
+
+{criteria_section}
 
 Genera un JSON estricto con la siguiente estructura:
 {{
@@ -307,19 +315,21 @@ class OllamaProvider(AIProvider):
                 "  O usa otro modelo: ollama pull llama2"
             )
     
-    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate niche content using local Ollama.
         
         Args:
             products: List of product dictionaries
             niche: Niche topic/category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Content dictionary or None if generation fails
         """
         try:
             products_json = self._format_products_for_prompt(products)
+            criteria_section = self._format_criteria_for_prompt(buying_criteria) if buying_criteria else ""
             
             prompt = f"""Eres un experto en marketing de afiliados de Amazon y contenido SEO.
 Tu tarea es generar análisis de productos de manera profesional y persuasiva.
@@ -329,6 +339,8 @@ Analiza estos productos de Amazon para el nicho "{niche}" y genera un análisis 
 
 PRODUCTOS:
 {products_json}
+
+{criteria_section}
 
 Genera un JSON estricto con la siguiente estructura (sin texto adicional fuera del JSON):
 {{
@@ -351,8 +363,8 @@ Reglas:
 - El título debe ser atractivo y contener la palabra clave principal
 - La meta descripción debe incluir la palabra clave y ser atractiva
 - Cada producto debe tener una insignia diferente
-- Los pros y contras deben ser específicos al producto
-- El resumen debe ser único para cada producto
+- Los pros y contras deben ser específicos al producto y relacionados con los criterios clave
+- El resumen debe ser único para cada producto, comparándolo respecto a los criterios
 - Usa un tono profesional pero conversacional
 - Responde ÚNICAMENTE con el JSON, sin explicaciones adicionales."""
 
@@ -425,19 +437,21 @@ Producto {i}:
                     return None
             return None
     
-    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate_niche_content(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate niche content using DeepSeek.
         
         Args:
             products: List of product dictionaries
             niche: Niche topic/category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Content dictionary or None if generation fails
         """
         try:
             products_json = self._format_products_for_prompt(products)
+            criteria_section = self._format_criteria_for_prompt(buying_criteria) if buying_criteria else ""
             
             system_prompt = """Eres un experto en marketing de afiliados de Amazon y contenido SEO.
 Tu tarea es generar análisis de productos de manera profesional y persuasiva.
@@ -447,6 +461,8 @@ Debes responder SIEMPRE con un JSON válido."""
 
 PRODUCTOS:
 {products_json}
+
+{criteria_section}
 
 Responde con este JSON:
 {{
@@ -502,6 +518,19 @@ Producto {i}:
 - Características: {', '.join(product.get('features', []))}
 """)
         return "\n".join(formatted)
+    
+    def _format_criteria_for_prompt(self, buying_criteria: List[Dict[str, str]]) -> str:
+        """Format buying criteria for AI prompt."""
+        if not buying_criteria:
+            return ""
+        
+        formatted = "\n5 CRITERIOS CLAVE DE COMPRA:\n"
+        for i, criterion in enumerate(buying_criteria, 1):
+            name = criterion.get('name', '')
+            source = criterion.get('source', '')
+            formatted += f"{i}. {name} (Fuente: {source})\n"
+        
+        return formatted
 
     def _extract_json(self, text: str) -> Optional[Dict[str, Any]]:
         """Extract JSON from text response."""
@@ -551,13 +580,14 @@ class AIContentGenerator:
         
         print(f"✓ Generador de IA inicializado con {provider.upper()}")
     
-    def generate(self, products: List[Dict[str, Any]], niche: str) -> Optional[Dict[str, Any]]:
+    def generate(self, products: List[Dict[str, Any]], niche: str, buying_criteria: List[Dict[str, str]] = None) -> Optional[Dict[str, Any]]:
         """
         Generate niche content.
         
         Args:
             products: List of products to analyze
             niche: Niche category
+            buying_criteria: List of key buying criteria (5 points)
             
         Returns:
             Generated content or None
@@ -566,4 +596,4 @@ class AIContentGenerator:
             print("✗ No hay productos para procesar")
             return None
         
-        return self.provider.generate_niche_content(products, niche)
+        return self.provider.generate_niche_content(products, niche, buying_criteria)
