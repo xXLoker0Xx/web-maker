@@ -8,26 +8,39 @@ interface Props {
   slug: string;
 }
 
-// Generar rutas estáticas para cada JSON en la carpeta content/
+// Generar rutas estáticas para cada JSON en la carpeta content/niches/
 export async function getStaticPaths() {
-  // Leer todos los archivos .json en src/content/
-  const files = import.meta.glob<{ default: NicheContent }>('../content/**/*.json', { 
-    eager: true,
-    import: 'default'
-  });
+  try {
+    // Usar import.meta.glob para obtener todos los archivos JSON
+    const files = import.meta.glob<any>('../content/niches/*.json', { 
+      eager: true,
+    });
 
-  return Object.entries(files).map(([path, module]) => {
-    // Extraer nombre de archivo: src/content/freidoras.json -> freidoras
-    const slug = path.split('/').pop()?.replace('.json', '') || 'index';
-    
-    return {
-      params: { slug },
-      props: {
-        content: module,
-        slug: slug
+    if (!files || Object.keys(files).length === 0) {
+      return [];
+    }
+
+    const paths = Object.entries(files).map(([path, module]) => {
+      const slug = path.split('/').pop()?.replace('.json', '') || 'index';
+      const content = module.default || module;
+      
+      if (!content) {
+        return null;
       }
-    };
-  });
+      
+      return {
+        params: { slug },
+        props: {
+          content: content,
+          slug: slug
+        }
+      };
+    }).filter(Boolean);
+    
+    return paths;
+  } catch (error) {
+    return [];
+  }
 }
 
 const { content, slug } = Astro.props;
@@ -226,14 +239,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </section>
       
       <section class="products-grid">
-        {content.products.map((product) => (
-          <ProductCard product={product} />
+        {content.products && content.products.length > 0 && content.products.map((product: any) => (
+          <ProductCard 
+            asin={product.asin}
+            title={product.title}
+            image_url={product.image_url}
+            price={product.price}
+            rating={product.rating}
+            reviews_count={product.reviews_count}
+            badge={product.badge}
+            pros={product.pros || []}
+            cons={product.cons || []}
+            summary={product.summary}
+            affiliate_url={product.affiliate_url}
+          />
         ))}
       </section>
       
       <section class="comparison-section">
         <h2>Comparativa de Productos</h2>
-        <ComparisonTable products={content.products} />
+        {content.products && content.products.length > 0 && <ComparisonTable products={content.products} />}
       </section>
       
       <section class="verdict-section">

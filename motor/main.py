@@ -333,7 +333,8 @@ class WebMakerOrchestrator:
             merged_content = self.merge_content(products, ai_content)
             
             # Save (with niche-based filename for multi-page support)
-            content_dir = Path(__file__).parent.parent / "plantilla-astro" / "src" / "content"
+            content_dir = Path(__file__).parent.parent / "plantilla-astro" / "src" / "content" / "niches"
+            content_dir.mkdir(parents=True, exist_ok=True)  # Crear directorio si no existe
             filename = f"{self.niche_slug}.json"
             astro_content_path = content_dir / filename
             success = self.save_output(merged_content, str(astro_content_path))
