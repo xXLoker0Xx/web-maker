@@ -14,6 +14,8 @@ interface Props {
   cons: string[];
   summary: string;
   affiliate_url?: string;
+  isRecommended?: boolean;
+  ranking?: number;
 }
 
 const {
@@ -28,6 +30,8 @@ const {
   cons,
   summary,
   affiliate_url,
+  isRecommended = false,
+  ranking,
 } = Astro.props;
 
 // Función para generar estrellas
@@ -42,10 +46,19 @@ const renderStars = (rating: number) => {
 };
 ---
 
-<article class="product-card">
-  <!-- Badge Premium -->
-  <div class="badge-container">
-    <span class="badge">{badge}</span>
+<article class={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 h-full flex flex-col overflow-hidden ${isRecommended ? 'ring-2 ring-blue-400' : ''}`}>
+  {/* Ranking badge */}
+  {ranking && (
+    <div class={`absolute top-4 left-4 flex items-center justify-center w-12 h-12 rounded-full font-bold text-white text-lg
+      ${ranking === 1 ? 'bg-yellow-500' : ranking === 2 ? 'bg-gray-400' : ranking === 3 ? 'bg-orange-600' : 'bg-blue-600'}
+    `}>
+      {ranking}
+    </div>
+  )}
+
+  {/* Badge Premium */}
+  <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-center text-white font-bold text-sm">
+    {badge}
   </div>
 
   <!-- Imagen del Producto -->

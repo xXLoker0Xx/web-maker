@@ -1,0 +1,25 @@
+---
+// DisclaimerBanner.astro - Banner de disclaimer compacto
+interface Props {
+  showAffiliate?: boolean;
+}
+
+const { showAffiliate = true } = Astro.props;
+---
+
+<div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-md mb-8 flex items-start gap-3">
+  <span class="text-blue-600 font-bold flex-shrink-0">ⓘ</span>
+  <div class="text-sm text-gray-700">
+    <strong class="text-gray-900">Transparencia:</strong>
+    {showAffiliate ? (
+      <span>
+        {' '}
+        Participamos en el Programa de Asociados de Amazon. Al hacer clic en nuestros enlaces y comprar, podemos
+        recibir una comisión sin costo adicional para ti. Nuestras recomendaciones son independientes y basadas en
+        análisis objetivos.
+      </span>
+    ) : (
+      <span> Los enlaces en esta página pueden ser enlaces de afiliados. Más información en nuestra política.</span>
+    )}
+  </div>
+</div>

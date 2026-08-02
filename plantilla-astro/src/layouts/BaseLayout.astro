@@ -1,0 +1,101 @@
+---
+// BaseLayout.astro - Layout base para todas las páginas
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  articleSchema?: any;
+  faqSchema?: any;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  articleSchema,
+  faqSchema,
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#6366F1" />
+    
+    {/* SEO Esencial */}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    {image && <meta property="og:image" content={image} />}
+    <meta property="og:site_name" content="Web Maker" />
+    <meta property="og:locale" content="es_ES" />
+    
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    
+    {/* Canonical */}
+    <link rel="canonical" href={canonicalUrl} />
+    
+    {/* Structured Data */}
+    {articleSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    )}
+    {faqSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
+    
+    {/* Organization Schema */}
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      'name': 'Web Maker',
+      'url': 'https://example.com',
+      'description': 'Guías de compra y comparativas de productos',
+      'sameAs': [],
+    })} />
+
+    {/* Favicon */}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    {/* Progress bar */}
+    <div class="progress-bar" id="progressBar"></div>
+
+    {/* Skip to main content */}
+    <a href="#main" class="skip-link">Ir al contenido principal</a>
+
+    {/* Slot principal */}
+    <main id="main">
+      <slot />
+    </main>
+
+    <script>
+      // Scroll progress bar
+      document.addEventListener('scroll', () => {
+        const scrollProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+          progressBar.style.setProperty('--scroll-progress', `${scrollProgress}%`);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -6,20 +6,31 @@ const nichesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    intro: z.string(),
-    verdict: z.string(),
+    intro: z.string().optional(),
+    verdict: z.string().optional(),
+    executive_summary: z.string().optional(),
+    key_takeaways: z.array(z.string()).optional(),
+    buying_guide: z.string().optional(),
+    buying_criteria: z.array(z.string()).optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
     products: z.array(z.object({
       asin: z.string(),
-      badge: z.string(),
+      title: z.string(),
+      short_title: z.string().optional(),
+      badge: z.string().optional(),
       pros: z.array(z.string()).optional(),
       cons: z.array(z.string()).optional(),
-      summary: z.string(),
+      summary: z.string().optional(),
+      highlights: z.array(z.string()).optional(),
       image_url: z.string().optional(),
       price: z.string().optional(),
       rating: z.number().optional(),
       reviews_count: z.number().optional(),
       affiliate_url: z.string().optional(),
-    })),
+    })).optional(),
   }),
 });
 
@@ -32,17 +43,25 @@ export const collections = {
 export interface NicheContent {
   title: string;
   description: string;
-  intro: string;
-  verdict: string;
-  products: Product[];
+  intro?: string;
+  verdict?: string;
+  executive_summary?: string;
+  key_takeaways?: string[];
+  buying_guide?: string;
+  buying_criteria?: string[];
+  faq?: Array<{ question: string; answer: string }>;
+  products?: Product[];
 }
 
 export interface Product {
   asin: string;
-  badge: string;
-  pros: string[];
-  cons: string[];
-  summary: string;
+  title: string;
+  short_title?: string;
+  badge?: string;
+  pros?: string[];
+  cons?: string[];
+  summary?: string;
+  highlights?: string[];
   image_url?: string;
   price?: string;
   rating?: number;

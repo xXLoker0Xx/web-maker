@@ -1,0 +1,42 @@
+---
+// FAQ.astro - Componente FAQ con detalles/summary HTML semántico
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2 class="text-4xl font-bold mb-4">Preguntas Frecuentes</h2>
+    <p class="text-gray-600 mb-12 text-lg">
+      Respuestas a las preguntas más comunes sobre estos productos.
+    </p>
+
+    <div class="space-y-4">
+      {items.map((item, index) => (
+        <details
+          class="group p-6 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer"
+          open={index === 0}
+        >
+          <summary class="flex items-center justify-between font-bold text-lg cursor-pointer select-none">
+            <span class="text-gray-900">{item.question}</span>
+            <span
+              class="text-blue-600 transform transition-transform group-open:rotate-180"
+              aria-hidden="true"
+            >
+              ▼
+            </span>
+          </summary>
+          <p class="mt-4 text-gray-700 leading-relaxed">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

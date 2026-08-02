@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sync": "astro sync"
   },
   "keywords": [
     "astro",
     "amazon",
     "affiliate",
-    "niche"
+    "niche",
+    "comparativas",
+    "reseñas"
   ],
   "author": "Web Maker",
   "license": "MIT",
@@ -20,6 +23,8 @@
     "astro": "^4.1.0"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "@tailwindcss/typography": "^0.5.10",
     "tailwindcss": "^3.4.1"
   }
 }

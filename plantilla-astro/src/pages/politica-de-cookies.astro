@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Política de Cookies - Web Maker';
+const description = 'Política de cookies de Web Maker. Cómo usamos cookies para mejorar tu experiencia de navegación.';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="bg-white">
+    <div class="container mx-auto px-6 max-w-4xl py-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">Política de Cookies</h1>
+      <p class="text-gray-600 text-sm mb-12">Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+      <div class="space-y-12 text-gray-700">
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">¿Qué son las Cookies?</h2>
+          <p class="leading-relaxed">
+            Las cookies son pequeños archivos de texto que se guardan en tu dispositivo cuando visitas un sitio web. Ayudan a mejorar tu experiencia de navegación y permiten a los sitios recordar tus preferencias.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Tipos de Cookies que Utilizamos</h2>
+          <ul class="space-y-4 ml-6">
+            <li>
+              <strong class="text-gray-900">Cookies Esenciales:</strong> Necesarias para el funcionamiento básico del sitio
+            </li>
+            <li>
+              <strong class="text-gray-900">Cookies de Rendimiento:</strong> Nos ayudan a entender cómo usas el sitio
+            </li>
+            <li>
+              <strong class="text-gray-900">Cookies de Funcionalidad:</strong> Recuerdan tus preferencias
+            </li>
+            <li>
+              <strong class="text-gray-900">Cookies de Marketing:</strong> Utilizadas para rastrear y analizar comportamiento
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Control de Cookies</h2>
+          <p class="leading-relaxed mb-4">
+            Puedes controlar y gestionar las cookies de varias formas:
+          </p>
+          <ul class="space-y-2 ml-6 list-disc">
+            <li>Cambiar la configuración de cookies en tu navegador web</li>
+            <li>Rechazar todas las cookies no esenciales al visitar nuestro sitio</li>
+            <li>Consultar la política de cookies individual de cada tercero</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Cookies de Terceros</h2>
+          <p class="leading-relaxed">
+            Nuestro sitio puede usar servicios de terceros que colocan cookies. No tenemos control total sobre estas cookies. Te recomendamos revisar sus políticas de privacidad.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Contacto</h2>
+          <p class="leading-relaxed">
+            Si tienes preguntas sobre nuestra política de cookies: contacto@example.com
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-gray-200 text-center text-gray-600">
+        <p>© 2026 Web Maker - Todos los derechos reservados</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Disclaimer de Afiliados - Web Maker';
+const description = 'Disclaimer del programa de afiliados de Web Maker. Declaración de transparencia sobre nuestras relaciones comerciales.';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="bg-white">
+    <div class="container mx-auto px-6 max-w-4xl py-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">Disclaimer de Afiliados</h1>
+      <p class="text-gray-600 text-sm mb-12">Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+      {/* Banner destacado */}
+      <div class="bg-blue-50 border-2 border-blue-400 p-8 rounded-lg mb-12">
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Declaración de Transparencia</h2>
+        <p class="text-blue-900 text-lg">
+          <strong>Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</strong>
+        </p>
+      </div>
+
+      <div class="space-y-12 text-gray-700">
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">1. ¿Qué es un Programa de Afiliados?</h2>
+          <p class="leading-relaxed">
+            Un programa de afiliados es un acuerdo comercial donde ganamos una comisión cuando los lectores compran productos a través de nuestros enlaces. Esto nos permite financiar el sitio y continuar creando contenido de calidad.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">2. Programas en los que Participamos</h2>
+          <ul class="space-y-3 ml-6 list-disc">
+            <li>Amazon Associates Program</li>
+            <li>Otros programas de afiliados seleccionados</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">3. Cómo Funciona</h2>
+          <p class="leading-relaxed mb-4">
+            Cuando haces clic en nuestros enlaces y completas una compra:
+          </p>
+          <ul class="space-y-2 ml-6 list-disc">
+            <li>Recibimos una comisión de la venta</li>
+            <li><strong>Tú NO pagas más</strong> - el precio es el mismo que si compraras directamente</li>
+            <li>La comisión viene de los márgenes de la plataforma, no de tu pago</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">4. Nuestro Compromiso</h2>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-green-600 font-bold">✓</span>
+              <span>Nuestras recomendaciones se basan en análisis independiente y objetivo</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-600 font-bold">✓</span>
+              <span>No recomendamos un producto solo porque ofrezca mayores comisiones</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-600 font-bold">✓</span>
+              <span>Somos transparentes sobre nuestras relaciones comerciales</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-green-600 font-bold">✓</span>
+              <span>Tu confianza es más valiosa que cualquier comisión</span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">5. Conflictos de Intereses</h2>
+          <p class="leading-relaxed">
+            Reconocemos que participar en programas de afiliados crea un incentivo financiero. Para mitigar esto:
+          </p>
+          <ul class="space-y-2 ml-6 list-disc mt-4">
+            <li>Usamos criterios de selección estrictos e imparciales</li>
+            <li>Comparamos productos de manera justa, incluso si algunos tienen menores comisiones</li>
+            <li>Incluimos descargos de responsabilidad claros en todas las páginas relevantes</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">6. No nos Hace Falta Recomendar Malos Productos</h2>
+          <p class="leading-relaxed">
+            Nuestro modelo de negocio depende de tu satisfacción. Si recomendamos un mal producto:
+          </p>
+          <ul class="space-y-2 ml-6 list-disc mt-4">
+            <li>Pierdes confianza en nosotros</li>
+            <li>Dejas de visitar nuestro sitio</li>
+            <li>La comisión a corto plazo no vale el daño a largo plazo</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">7. Contacto y Reportar Problemas</h2>
+          <p class="leading-relaxed">
+            Si crees que hemos recomendado un producto de manera desgenerada o identificas un conflicto de intereses, por favor contacta:
+          </p>
+          <p class="mt-4">📧 contacto@example.com</p>
+        </section>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-gray-200 text-center text-gray-600">
+        <p>© 2026 Web Maker - Todos los derechos reservados</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

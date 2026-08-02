@@ -1,0 +1,39 @@
+---
+// BuyingCriteria.astro - Sección de criterios de compra con iconos
+interface Criterion {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  criteria: Criterion[];
+}
+
+const { criteria } = Astro.props;
+---
+
+<section class="py-16">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2 class="text-4xl font-bold mb-4">¿Cómo Elegimos?</h2>
+    <p class="text-gray-600 mb-12 text-lg">
+      Nuestras recomendaciones se basan en estos criterios esenciales de evaluación:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {criteria.map((criterion) => (
+        <div
+          class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 hover:shadow-lg transition-shadow"
+        >
+          <div class="flex items-start gap-4">
+            <div class="text-3xl flex-shrink-0">{criterion.icon}</div>
+            <div>
+              <h3 class="font-bold text-lg mb-2">{criterion.title}</h3>
+              <p class="text-gray-700 text-sm leading-relaxed">{criterion.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+// Hero.astro - Sección hero con gradiente
+interface Props {
+  title: string;
+  subtitle: string;
+  cta?: {
+    text: string;
+    href: string;
+  };
+  image?: string;
+}
+
+const { title, subtitle, cta, image } = Astro.props;
+---
+
+<section
+  class="relative py-20 md:py-32 bg-gradient-to-r from-[#5B7CFF] to-[#7F5AF0] text-white overflow-hidden"
+>
+  {/* Background effects */}
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full mix-blend-screen blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-screen blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      {/* Contenido */}
+      <div>
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          {title}
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
+          {subtitle}
+        </p>
+        {cta && (
+          <a
+            href={cta.href}
+            class="inline-block bg-white text-[#5B7CFF] font-bold px-8 py-4 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            {cta.text}
+          </a>
+        )}
+      </div>
+
+      {/* Imagen opcional */}
+      {image && (
+        <div class="flex justify-center">
+          <img
+            src={image}
+            alt={title}
+            class="max-w-full h-auto rounded-lg shadow-2xl"
+            loading="lazy"
+          />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+// BestProductSection.astro - Sección destacada del mejor producto
+interface Props {
+  image: string;
+  title: string;
+  rating: number;
+  reviews: number;
+  badge: string;
+  highlights: string[];
+  pros: string[];
+  reason: string;
+  price?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  isRecommended?: boolean;
+}
+
+const {
+  image,
+  title,
+  rating,
+  reviews,
+  badge,
+  highlights,
+  pros,
+  reason,
+  price,
+  ctaText = 'Ver en Amazon',
+  ctaLink,
+  isRecommended = true,
+} = Astro.props;
+
+const renderStars = (rating: number) => {
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating % 1 >= 0.5;
+  let stars = '★'.repeat(fullStars);
+  if (hasHalf && fullStars < 5) stars += '½';
+  const emptyStars = 5 - Math.ceil(rating);
+  stars += '☆'.repeat(emptyStars);
+  return stars;
+};
+---
+
+<section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+      {/* Encabezado con badge */}
+      <div class="mb-12">
+        <div class="inline-block mb-4">
+          <span class="bg-blue-100 text-blue-900 px-4 py-2 rounded-lg font-bold text-sm">
+            🏆 {badge}
+          </span>
+        </div>
+        <h2 class="text-4xl font-bold mb-4">Nuestra Recomendación Principal</h2>
+      </div>
+
+      {/* Grid con imagen y contenido */}
+      <div class="grid md:grid-cols-3 gap-12 items-start">
+        {/* Imagen */}
+        <div class="md:col-span-1 flex justify-center">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-xl opacity-30 blur-lg"></div>
+            <img
+              src={image}
+              alt={title}
+              class="relative max-w-full h-auto rounded-xl shadow-md hover:shadow-lg transition-shadow"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* Contenido */}
+        <div class="md:col-span-2">
+          {/* Título y rating */}
+          <h3 class="text-3xl font-bold mb-4">{title}</h3>
+
+          {/* Rating */}
+          <div class="flex items-center gap-4 mb-6">
+            <div class="text-3xl font-bold text-yellow-500">{renderStars(rating)}</div>
+            <div>
+              <p class="font-bold text-lg">{rating.toFixed(1)}/5</p>
+              <p class="text-gray-600">({reviews.toLocaleString()} reseñas)</p>
+            </div>
+          </div>
+
+          {/* Puntos destacados */}
+          <div class="mb-8">
+            <h4 class="font-bold text-lg mb-3">Lo mejor de este producto:</h4>
+            <ul class="space-y-2">
+              {highlights.map((highlight) => (
+                <li class="flex items-center gap-3">
+                  <span class="text-green-500 font-bold">✓</span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Ventajas principales */}
+          {pros.length > 0 && (
+            <div class="mb-8 p-4 bg-green-50 rounded-lg border border-green-200">
+              <h4 class="font-bold text-green-900 mb-3">Ventajas principales:</h4>
+              <ul class="space-y-2 text-green-900">
+                {pros.slice(0, 3).map((pro) => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-lg mt-1">⚡</span>
+                    <span>{pro}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Por qué lo recomendamos */}
+          <div class="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <p class="text-blue-900">
+              <strong>Por qué es nuestra recomendación:</strong> {reason}
+            </p>
+          </div>
+
+          {/* Precio y CTA */}
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            {price && (
+              <div class="text-2xl font-bold text-gray-900">
+                {price}
+              </div>
+            )}
+            {ctaLink && (
+              <a
+                href={ctaLink}
+                class="flex-1 sm:flex-none bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg font-bold hover:shadow-lg hover:scale-105 transition-all duration-300 text-center"
+              >
+                {ctaText}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

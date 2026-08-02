@@ -1,0 +1,43 @@
+---
+// Header.astro - Encabezado navegable
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title?: string;
+  currentSlug?: string;
+}
+
+const { title = 'Web Maker', currentSlug } = Astro.props;
+---
+
+<header class="sticky top-0 bg-white z-50 border-b border-gray-200">
+  <div class="container mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
+    <a href="/" class="font-bold text-2xl text-blue-600 hover:text-blue-700 transition-colors">
+      {title}
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Inicio</a>
+      <a href="#main" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Comparativa</a>
+      <a href="/#niches" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Categorías</a>
+    </nav>
+    <button
+      id="mobileMenuBtn"
+      class="md:hidden text-gray-700 hover:text-blue-600 transition-colors"
+      aria-label="Abrir menú"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle (opcional)
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+      console.log('Mobile menu clicked');
+    });
+  }
+</script>

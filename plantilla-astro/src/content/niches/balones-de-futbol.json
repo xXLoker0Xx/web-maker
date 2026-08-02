@@ -13,6 +13,7 @@
   "products": [
     {
       "asin": "B0FCSCRXTV",
+      "title": "Pelota adidas World Cup League Ball",
       "short_title": "Pelota adidas World Cup League Ball",
       "badge": "Mejor calidad-precio",
       "pros": [
@@ -33,6 +34,7 @@
     },
     {
       "asin": "B091Z48J81",
+      "title": "UEFA Champions League Football",
       "short_title": "UEFA Champions League Football",
       "badge": "Mejor para coleccionistas",
       "pros": [
@@ -52,6 +54,7 @@
     },
     {
       "asin": "B0DLJD5K46",
+      "title": "adidas Copa Mundial Training",
       "short_title": "adidas Copa Mundial Training",
       "badge": "Mejor rendimiento",
       "pros": [
@@ -71,6 +74,7 @@
     },
     {
       "asin": "B0FVH638HX",
+      "title": "adidas Liga Trionda Finales Copa Mundial",
       "short_title": "adidas Liga Trionda Finales Copa Mundial",
       "badge": "Mejor durabilidad",
       "pros": [
@@ -90,6 +94,7 @@
     },
     {
       "asin": "B0CKTG7WK5",
+      "title": "PUMA Orbita 6 Ms Pelotas de entrenamiento",
       "short_title": "PUMA Orbita 6 Ms Pelotas de entrenamiento",
       "badge": "Mejor para jugadores principiantes",
       "pros": [

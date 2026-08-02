@@ -1,10 +1,14 @@
 import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   // Configuración general
   site: 'https://example.com',
   output: 'static', // SSG: Static Site Generation
   
+  // Integración de Tailwind CSS
+  integrations: [tailwind()],
+
   // Soporte para componentes que usan JSX
   vite: {
     ssr: {

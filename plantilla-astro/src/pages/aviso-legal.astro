@@ -1,109 +1,135 @@
 ---
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Aviso Legal - Web Maker';
+const description = 'Aviso legal y términos de uso de Web Maker. Información sobre nuestro modelo de negocio y responsabilidades.';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aviso Legal - losmejores5.com</title>
-    <meta name="description" content="Aviso legal y términos de uso de losmejores5.com - sitio de análisis y comparativas de productos.">
-    <meta property="og:title" content="Aviso Legal - losmejores5.com">
-    <meta property="og:type" content="website">
-  <link rel="canonical" href={canonicalURL}>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; background: white; }
-    h1 { color: #667eea; margin-bottom: 30px; font-size: 2rem; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
-    h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; }
-    h3 { color: #764ba2; margin-top: 20px; margin-bottom: 10px; font-size: 1.2rem; }
-    p { margin-bottom: 15px; text-align: justify; }
-    ul, ol { margin-left: 20px; margin-bottom: 15px; }
-    li { margin-bottom: 10px; }
-    .last-updated { color: #666; font-size: 0.9rem; margin-bottom: 20px; font-style: italic; }
-    .disclaimer { background: #fff9e6; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px; }
-    a { color: #667eea; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
-    .nav-footer a { margin: 0 15px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Aviso Legal</h1>
-    <p class="last-updated">Última actualización: Agosto 2026 | losmejores5.com</p>
-    
-    <div class="disclaimer">
-      <strong>Aviso Importante:</strong> Este sitio es un participante en el Programa de Asociados de Amazon Services LLC, un programa de publicidad de afiliados diseñado para proporcionar un medio para que los sitios obtengan honorarios publicitarios por publicidad y enlaces a Amazon.
-    </div>
-    
-    <h2>1. Propósito del Sitio</h2>
-    <p>Los Mejores 5 (losmejores5.com) es un sitio web de análisis, comparativas y recomendaciones de productos. Nuestro objetivo es ayudarte a tomar decisiones de compra informadas proporcionando información detallada sobre diversos productos disponibles en Amazon.</p>
-    
-    <h2>2. Naturaleza del Contenido</h2>
-    <p>Todo el contenido en nuestro sitio, incluyendo análisis de productos, comparativas, pros, contras y recomendaciones, es proporcionado con fines informativos únicamente. Los contenidos se generan utilizando información técnica y análisis automático que pueden no reflejar todas las características de un producto o cambios posteriores.</p>
-    
-    <h2>3. Disclaimer de Responsabilidad</h2>
-    <p>Los Mejores 5 NO garantiza la exactitud, completitud, actualización o confiabilidad del contenido del sitio. El contenido se proporciona "tal cual" sin garantías de ningún tipo. No somos responsables de:</p>
-    <ul>
-      <li>Errores u omisiones en la información de productos</li>
-      <li>Cambios en precios, disponibilidad o características de productos</li>
-      <li>Daños o perjuicios resultantes del uso de este sitio</li>
-      <li>La calidad o desempeño de los productos comprados a través de nuestros enlaces</li>
-      <li>Decisiones de compra basadas en nuestras recomendaciones</li>
-    </ul>
-    
-    <h2>4. Enlaces de Afiliados</h2>
-    <p>Cuando haces clic en un enlace de producto y compras en Amazon, nosotros recibimos una comisión. Esto no afecta el precio que pagas. Nuestras recomendaciones se basan en análisis objetivo de características, precios y opiniones de usuarios, no en comisiones.</p>
-    
-    <h2>5. Independencia Editorial</h2>
-    <p>Nuestro sitio es independiente de Amazon. Aunque participamos en su programa de afiliados, esto no afecta nuestros criterios de selección y análisis de productos. Nuestras opiniones son propias y no están influenciadas por Amazon.</p>
-    
-    <h2>6. No Somos Expertos Médicos o Legales</h2>
-    <p>El contenido de este sitio no debe ser considerado como consejo médico, legal o profesional. Para cuestiones específicas, consulta con un profesional calificado.</p>
-    
-    <h2>7. Limitación de Responsabilidad</h2>
-    <p>En la máxima medida permitida por la ley, Los Mejores 5 no será responsable de daños directos, indirectos, incidentales, especiales, consecuentes o ejemplares resultantes del uso o la imposibilidad de usar el sitio, incluso si ha sido avisado de la posibilidad de tales daños.</p>
-    
-    <h2>8. Modificación de Contenido</h2>
-    <p>Nos reservamos el derecho de modificar, actualizar o eliminar contenido en cualquier momento sin aviso previo. Las actualizaciones de contenido pueden no reflejarse inmediatamente en todas las páginas.</p>
-    
-    <h2>9. Uso Aceptable</h2>
-    <p>No debes usar este sitio para:</p>
-    <ul>
-      <li>Actividades ilegales o fraudulentas</li>
-      <li>Acceso no autorizado a sistemas</li>
-      <li>Distribución de malware o código malicioso</li>
-      <li>Infracciones de derechos de autor o propiedad intelectual</li>
-      <li>Acoso o abuso</li>
-    </ul>
-    
-    <h2>10. Propiedad Intelectual</h2>
-    <p>El contenido original de este sitio está protegido por derechos de autor. Se permite la visualización y descarga personal, pero no la reproducción comercial sin permiso.</p>
-    
-    <h2>11. Contacto</h2>
-    <p>Para consultas legales o preguntas sobre nuestros términos de uso:</p>
-    <ul>
-      <li>📧 Correo: contacto@losmejores5.com</li>
-      <li>🌐 Sitio: https://www.losmejores5.com</li>
-      <li>📝 Formulario de contacto: disponible en el sitio</li>
-    </ul>
-    
-    <h2>12. Cambios a Este Aviso</h2>
-    <p>Nos reservamos el derecho de actualizar este Aviso Legal en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación.</p>
-    
-    <div class="nav-footer">
-      <p style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
-        © 2026 losmejores5.com - Todos los derechos reservados
-      </p>
-      <div>
-        <a href="/">← Volver al inicio</a>
-        <a href="/politica-de-privacidad">Política de Privacidad</a>
-        <a href="/afiliados">Política de Afiliados</a>
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="bg-white">
+    <div class="container mx-auto px-6 max-w-4xl py-16">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">Aviso Legal</h1>
+      <p class="text-gray-600 text-sm mb-12">Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+      {/* Aviso importante */}
+      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-12">
+        <h2 class="font-bold text-yellow-900 mb-2">⚠️ Aviso Importante</h2>
+        <p class="text-yellow-900">
+          Este sitio es un participante en el Programa de Asociados de Amazon Services LLC, un programa de publicidad de afiliados diseñado para proporcionar un medio para que los sitios obtengan honorarios publicitarios por publicidad y enlaces a Amazon.
+        </p>
+      </div>
+
+      {/* Contenido */}
+      <div class="prose prose-lg max-w-none">
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-0">1. Propósito del Sitio</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Web Maker es un sitio web de análisis, comparativas y recomendaciones de productos. Nuestro objetivo es ayudarte a tomar decisiones de compra informadas proporcionando información detallada sobre diversos productos disponibles.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">2. Naturaleza del Contenido</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Todo el contenido en nuestro sitio, incluyendo análisis de productos, comparativas, pros, contras y recomendaciones, es proporcionado con fines informativos únicamente. Los contenidos pueden generarse utilizando información técnica, análisis automático y recopilación de datos que pueden no reflejar todas las características de un producto o cambios posteriores.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">3. Disclaimer de Responsabilidad</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            Web Maker <strong>NO garantiza</strong> la exactitud, completitud, actualización o confiabilidad del contenido del sitio. El contenido se proporciona "tal cual" sin garantías de ningún tipo. No somos responsables de:
+          </p>
+          <ul class="space-y-3 text-gray-700 ml-6 mb-6">
+            <li>✗ Errores u omisiones en la información de productos</li>
+            <li>✗ Cambios en precios, disponibilidad o características de productos</li>
+            <li>✗ Daños o perjuicios resultantes del uso de este sitio</li>
+            <li>✗ La calidad o desempeño de los productos comprados a través de nuestros enlaces</li>
+            <li>✗ Decisiones de compra basadas en nuestras recomendaciones</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">4. Enlaces de Afiliados</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Cuando haces clic en un enlace de producto y compras, nosotros recibimos una comisión. <strong>Esto no afecta el precio que pagas</strong>. Nuestras recomendaciones se basan en análisis objetivo de características, precios y opiniones de usuarios, no en comisiones.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">5. Independencia Editorial</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Nuestro sitio es independiente. Aunque participamos en programas de afiliados, esto no afecta nuestros criterios de selección y análisis de productos. Nuestras opiniones son propias y no están influenciadas por terceros.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">6. No Somos Expertos Médicos o Legales</h2>
+          <p class="text-gray-700 leading-relaxed">
+            El contenido de este sitio no debe ser considerado como consejo médico, legal o profesional. Para cuestiones específicas, consulta con un profesional calificado.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">7. Limitación de Responsabilidad</h2>
+          <p class="text-gray-700 leading-relaxed">
+            En la máxima medida permitida por la ley, Web Maker no será responsable de daños directos, indirectos, incidentales, especiales, consecuentes o ejemplares resultantes del uso o la imposibilidad de usar el sitio.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">8. Modificación de Contenido</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Nos reservamos el derecho de modificar, actualizar o eliminar contenido en cualquier momento sin aviso previo. Las actualizaciones pueden no reflejarse inmediatamente en todas las páginas.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">9. Uso Aceptable</h2>
+          <p class="text-gray-700 leading-relaxed mb-6">
+            No debes usar este sitio para:
+          </p>
+          <ul class="space-y-3 text-gray-700 ml-6 mb-6">
+            <li>⚠️ Actividades ilegales o fraudulentas</li>
+            <li>⚠️ Acceso no autorizado a sistemas</li>
+            <li>⚠️ Distribución de malware o código malicioso</li>
+            <li>⚠️ Infracciones de derechos de autor o propiedad intelectual</li>
+            <li>⚠️ Acoso o abuso</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">10. Propiedad Intelectual</h2>
+          <p class="text-gray-700 leading-relaxed">
+            El contenido original de este sitio está protegido por derechos de autor. Se permite la visualización y descarga personal, pero no la reproducción comercial sin permiso.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">11. Contacto</h2>
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Para consultas legales o preguntas sobre nuestros términos de uso:
+          </p>
+          <ul class="space-y-2 text-gray-700 ml-6">
+            <li>📧 Correo: contacto@example.com</li>
+            <li>🌐 Sitio: https://example.com</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">12. Cambios a Este Aviso</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Nos reservamos el derecho de actualizar este Aviso Legal en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación.
+          </p>
+        </section>
       </div>
     </div>
-  </div>
+  </main>
+</BaseLayout>
 </body>
 </html>
