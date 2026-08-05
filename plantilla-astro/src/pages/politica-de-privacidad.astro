@@ -1,121 +1,180 @@
 ---
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Política de Privacidad - Web Maker';
+const description = 'Política de privacidad de Web Maker. Cómo protegemos y manejamos tus datos personales.';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidad - losmejores5.com</title>
-    <meta name="description" content="Política de privacidad de losmejores5.com - Cómo protegemos y manejamos tus datos personales.">
-    <meta property="og:title" content="Política de Privacidad - losmejores5.com">
-    <meta property="og:type" content="website">
-  <link rel="canonical" href={canonicalURL}>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; background: white; }
-    h1 { color: #667eea; margin-bottom: 30px; font-size: 2rem; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
-    h2 { color: #667eea; margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; }
-    h3 { color: #764ba2; margin-top: 20px; margin-bottom: 10px; font-size: 1.2rem; }
-    p { margin-bottom: 15px; text-align: justify; }
-    ul, ol { margin-left: 20px; margin-bottom: 15px; }
-    li { margin-bottom: 10px; }
-    .last-updated { color: #666; font-size: 0.9rem; margin-bottom: 20px; font-style: italic; }
-    a { color: #667eea; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; }
-    .nav-footer a { margin: 0 15px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Política de Privacidad</h1>
-    <p class="last-updated">Última actualización: Agosto 2026 | losmejores5.com</p>
-    
-    <h2>1. Introducción</h2>
-    <p><strong>losmejores5.com</strong> se compromete a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos, compartimos y protegemos tu información cuando visitas nuestro sitio web.</p>
-    
-    <h2>2. Información que Recopilamos</h2>
-    <p>Recopilamos información de varias formas:</p>
-    <h3>Información que proporcionas voluntariamente</h3>
-    <ul>
-      <li>Comentarios y opiniones en formularios</li>
-      <li>Consultas a través de formularios de contacto</li>
-      <li>Información de suscripción a boletines (si aplica)</li>
-    </ul>
-    
-    <h3>Información recopilada automáticamente</h3>
-    <ul>
-      <li>Dirección IP</li>
-      <li>Tipo de navegador</li>
-      <li>Sistema operativo</li>
-      <li>Páginas visitadas</li>
-      <li>Hora y duración de la visita</li>
-      <li>Cookies y tecnologías similares</li>
-    </ul>
-    
-    <h2>3. Uso de tu Información</h2>
-    <p>Utilizamos la información recopilada para:</p>
-    <ul>
-      <li>Generar, cumplimentar y realizar transacciones</li>
-      <li>Enviar información administrativa y actualizaciones</li>
-      <li>Responder a tus consultas e inquietudes</li>
-      <li>Mejorar nuestro sitio web y servicios</li>
-      <li>Analizar el uso del sitio para optimizar la experiencia del usuario</li>
-      <li>Cumplir con obligaciones legales</li>
-    </ul>
-    
-    <h2>4. Divulgación de tu Información</h2>
-    <p>Podemos compartir tu información en las siguientes circunstancias:</p>
-    <ul>
-      <li><strong>Con prestadores de servicios:</strong> Empresas que nos ayudan a operar nuestro sitio</li>
-      <li><strong>Requisitos legales:</strong> Cuando sea requerido por ley</li>
-      <li><strong>Protección de derechos:</strong> Para proteger nuestros derechos y seguridad</li>
-      <li><strong>Enlaces de afiliados:</strong> Al hacer clic en enlaces de Amazon, se aplica la política de privacidad de Amazon</li>
-    </ul>
-    
-    <h2>5. Seguridad de tu Información</h2>
-    <p>Implementamos medidas de seguridad técnicas, administrativas y físicas para proteger tu información personal. Sin embargo, ninguna transmisión por Internet es completamente segura, y no podemos garantizar la seguridad absoluta.</p>
-    
-    <h2>6. Cookies</h2>
-    <p>Nuestro sitio puede utilizar cookies para mejorar tu experiencia. Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar algunas funciones del sitio.</p>
-    
-    <h2>7. Enlaces a Terceros</h2>
-    <p>Nuestro sitio contiene enlaces a sitios de terceros, incluidos productos de Amazon. No somos responsables de las políticas de privacidad de estos sitios. Te recomendamos revisar sus políticas de privacidad antes de proporcionar información personal.</p>
-    
-    <h2>8. Derechos del Usuario</h2>
-    <p>Dependiendo de tu ubicación, puedes tener derecho a:</p>
-    <ul>
-      <li>Acceder a tu información personal</li>
-      <li>Solicitar la corrección de datos inexactos</li>
-      <li>Solicitar la eliminación de tu información</li>
-      <li>Oponerme al procesamiento de tu información</li>
-    </ul>
-    
-    <h2>9. Cambios a Esta Política</h2>
-    <p>Nos reservamos el derecho de actualizar esta Política de Privacidad en cualquier momento. Te notificaremos de cambios significativos publicando la nueva política en este sitio con la fecha de última actualización.</p>
-    
-    <h2>10. Contacto</h2>
-    <p>Si tienes preguntas, inquietudes o solicitudes relacionadas con esta Política de Privacidad:</p>
-    <ul>
-      <li>📧 Correo: contacto@losmejores5.com</li>
-      <li>🌐 Sitio: https://www.losmejores5.com</li>
-      <li>📝 Formulario de contacto: disponible en el sitio</li>
-    </ul>
-    <p>Nos comprometemos a responder a tus solicitudes dentro de 30 días hábiles.</p>
-    
-    <div class="nav-footer">
-      <p style="margin-bottom: 15px; color: #666; font-size: 0.9rem;">
-        © 2026 losmejores5.com - Todos los derechos reservados | Política de Privacidad
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Header />
+
+  <main class="flex-grow bg-gray-50">
+    {/* Breadcrumbs */}
+    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto w-full px-6 py-4 text-sm text-gray-500">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-[var(--primary)] transition-colors">Inicio</a></li>
+        <li>/</li>
+        <li class="text-gray-900 font-medium" aria-current="page">Política de Privacidad</li>
+      </ol>
+    </nav>
+
+    {/* Hero Section */}
+    <div class="hero-gradient text-white rounded-[var(--radius)] shadow-lg max-w-5xl mx-auto w-full px-6 mb-12 p-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Política de Privacidad</h1>
+      <p class="text-lg opacity-90">Cómo protegemos y manejamos tus datos personales</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 pb-20">
+      
+      {/* Última actualización */}
+      <p class="text-gray-600 text-sm mb-12">
+        Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
       </p>
-      <div>
-        <a href="/">← Volver al inicio</a>
-        <a href="/aviso-legal">Aviso Legal</a>
-        <a href="/afiliados">Política de Afiliados</a>
+
+      {/* Contenido */}
+      <div class="space-y-8">
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">1</span>
+            <h2 class="text-2xl font-bold text-gray-900">Introducción</h2>
+          </div>
+          <p class="text-gray-700 leading-relaxed ml-14">
+            <strong>Web Maker</strong> se compromete a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos, compartimos y protegemos tu información cuando visitas nuestro sitio web.
+          </p>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">2</span>
+            <h2 class="text-2xl font-bold text-gray-900">Información que Recopilamos</h2>
+          </div>
+          <div class="ml-14 space-y-6">
+            <p class="text-gray-700">Recopilamos información de varias formas:</p>
+            
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-3">Información que proporcionas voluntariamente</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Comentarios y opiniones en formularios</li>
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Consultas a través de formularios de contacto</li>
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Información de suscripción a boletines</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-3">Información recopilada automáticamente</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Dirección IP</li>
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Tipo de navegador y sistema operativo</li>
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Páginas visitadas y duración de la visita</li>
+                <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Cookies y tecnologías similares</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">3</span>
+            <h2 class="text-2xl font-bold text-gray-900">Uso de tu Información</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">Utilizamos la información recopilada para:</p>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Generar, cumplimentar y realizar transacciones</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Enviar información administrativa y actualizaciones</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Responder a tus consultas e inquietudes</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Mejorar nuestro sitio web y servicios</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Cumplir con obligaciones legales</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">4</span>
+            <h2 class="text-2xl font-bold text-gray-900">Divulgación de tu Información</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">Podemos compartir tu información en las siguientes circunstancias:</p>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-[var(--primary)] mt-1">•</span>
+                <div>
+                  <strong>Con prestadores de servicios:</strong> Empresas que nos ayudan a operar nuestro sitio
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[var(--primary)] mt-1">•</span>
+                <div>
+                  <strong>Requisitos legales:</strong> Cuando sea requerido por ley
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[var(--primary)] mt-1">•</span>
+                <div>
+                  <strong>Enlaces de afiliados:</strong> Al hacer clic en enlaces de Amazon, se aplica su política
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">5</span>
+            <h2 class="text-2xl font-bold text-gray-900">Seguridad de tu Información</h2>
+          </div>
+          <p class="text-gray-700 leading-relaxed ml-14">
+            Implementamos medidas de seguridad técnicas, administrativas y físicas para proteger tu información personal. Sin embargo, ninguna transmisión por Internet es completamente segura.
+          </p>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">6</span>
+            <h2 class="text-2xl font-bold text-gray-900">Cookies</h2>
+          </div>
+          <p class="text-gray-700 leading-relaxed ml-14">
+            Nuestro sitio puede utilizar cookies para mejorar tu experiencia. Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar algunas funciones del sitio.
+          </p>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">7</span>
+            <h2 class="text-2xl font-bold text-gray-900">Derechos del Usuario</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">Dependiendo de tu ubicación, puedes tener derecho a:</p>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">✓</span> Acceder a tu información personal</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">✓</span> Solicitar la corrección de datos inexactos</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">✓</span> Solicitar la eliminación de tu información</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">✓</span> Oponerme al procesamiento de tu información</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">8</span>
+            <h2 class="text-2xl font-bold text-gray-900">Contacto</h2>
+          </div>
+          <div class="ml-14 space-y-3 text-gray-700">
+            <p>Si tienes preguntas sobre esta Política de Privacidad:</p>
+            <div class="space-y-2">
+              <p class="flex items-center gap-2"><span>📧</span> <a href="mailto:contacto@example.com" class="text-[var(--primary)] hover:underline">contacto@example.com</a></p>
+              <p class="flex items-center gap-2"><span>🌐</span> <span>https://www.losmejores5.com</span></p>
+            </div>
+            <p class="text-sm pt-4 border-t border-gray-200">Nos comprometemos a responder a tus solicitudes dentro de 30 días hábiles.</p>
+          </div>
+        </section>
       </div>
     </div>
-  </div>
-</body>
-</html>
+  </main>
+
+  <Footer />
+</BaseLayout>

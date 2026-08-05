@@ -11,125 +11,111 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <BaseLayout title={title} description={description} canonical={canonical}>
   <Header />
 
-  <main class="bg-white">
-    <div class="container mx-auto px-6 max-w-4xl py-16">
-      <h1 class="text-5xl font-bold text-gray-900 mb-4">Aviso Legal</h1>
-      <p class="text-gray-600 text-sm mb-12">Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+  <main class="flex-grow bg-gray-50">
+    {/* Breadcrumbs */}
+    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto w-full px-6 py-4 text-sm text-gray-500">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-[var(--primary)] transition-colors">Inicio</a></li>
+        <li>/</li>
+        <li class="text-gray-900 font-medium" aria-current="page">Aviso Legal</li>
+      </ol>
+    </nav>
+
+    {/* Hero Section */}
+    <div class="hero-gradient text-white rounded-[var(--radius)] shadow-lg max-w-5xl mx-auto w-full px-6 mb-12 p-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Aviso Legal</h1>
+      <p class="text-lg opacity-90">Información sobre nuestro sitio, términos de uso y responsabilidades</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 pb-20">
+      
+      {/* Última actualización */}
+      <p class="text-gray-600 text-sm mb-12">
+        Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
 
       {/* Aviso importante */}
-      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-12">
-        <h2 class="font-bold text-yellow-900 mb-2">⚠️ Aviso Importante</h2>
-        <p class="text-yellow-900">
+      <div class="bg-amber-50 border-l-4 border-[var(--accent)] p-6 rounded-[var(--radius)] mb-12 shadow-sm">
+        <h2 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+          <span>⚠️</span> Aviso Importante
+        </h2>
+        <p class="text-amber-900 text-sm">
           Este sitio es un participante en el Programa de Asociados de Amazon Services LLC, un programa de publicidad de afiliados diseñado para proporcionar un medio para que los sitios obtengan honorarios publicitarios por publicidad y enlaces a Amazon.
         </p>
       </div>
 
       {/* Contenido */}
-      <div class="prose prose-lg max-w-none">
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4 mt-0">1. Propósito del Sitio</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Web Maker es un sitio web de análisis, comparativas y recomendaciones de productos. Nuestro objetivo es ayudarte a tomar decisiones de compra informadas proporcionando información detallada sobre diversos productos disponibles.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">2. Naturaleza del Contenido</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Todo el contenido en nuestro sitio, incluyendo análisis de productos, comparativas, pros, contras y recomendaciones, es proporcionado con fines informativos únicamente. Los contenidos pueden generarse utilizando información técnica, análisis automático y recopilación de datos que pueden no reflejar todas las características de un producto o cambios posteriores.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">3. Disclaimer de Responsabilidad</h2>
-          <p class="text-gray-700 leading-relaxed mb-6">
-            Web Maker <strong>NO garantiza</strong> la exactitud, completitud, actualización o confiabilidad del contenido del sitio. El contenido se proporciona "tal cual" sin garantías de ningún tipo. No somos responsables de:
-          </p>
-          <ul class="space-y-3 text-gray-700 ml-6 mb-6">
-            <li>✗ Errores u omisiones en la información de productos</li>
-            <li>✗ Cambios en precios, disponibilidad o características de productos</li>
-            <li>✗ Daños o perjuicios resultantes del uso de este sitio</li>
-            <li>✗ La calidad o desempeño de los productos comprados a través de nuestros enlaces</li>
-            <li>✗ Decisiones de compra basadas en nuestras recomendaciones</li>
-          </ul>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">4. Enlaces de Afiliados</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Cuando haces clic en un enlace de producto y compras, nosotros recibimos una comisión. <strong>Esto no afecta el precio que pagas</strong>. Nuestras recomendaciones se basan en análisis objetivo de características, precios y opiniones de usuarios, no en comisiones.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">5. Independencia Editorial</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Nuestro sitio es independiente. Aunque participamos en programas de afiliados, esto no afecta nuestros criterios de selección y análisis de productos. Nuestras opiniones son propias y no están influenciadas por terceros.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">6. No Somos Expertos Médicos o Legales</h2>
-          <p class="text-gray-700 leading-relaxed">
-            El contenido de este sitio no debe ser considerado como consejo médico, legal o profesional. Para cuestiones específicas, consulta con un profesional calificado.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">7. Limitación de Responsabilidad</h2>
-          <p class="text-gray-700 leading-relaxed">
-            En la máxima medida permitida por la ley, Web Maker no será responsable de daños directos, indirectos, incidentales, especiales, consecuentes o ejemplares resultantes del uso o la imposibilidad de usar el sitio.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">8. Modificación de Contenido</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Nos reservamos el derecho de modificar, actualizar o eliminar contenido en cualquier momento sin aviso previo. Las actualizaciones pueden no reflejarse inmediatamente en todas las páginas.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">9. Uso Aceptable</h2>
-          <p class="text-gray-700 leading-relaxed mb-6">
-            No debes usar este sitio para:
-          </p>
-          <ul class="space-y-3 text-gray-700 ml-6 mb-6">
-            <li>⚠️ Actividades ilegales o fraudulentas</li>
-            <li>⚠️ Acceso no autorizado a sistemas</li>
-            <li>⚠️ Distribución de malware o código malicioso</li>
-            <li>⚠️ Infracciones de derechos de autor o propiedad intelectual</li>
-            <li>⚠️ Acoso o abuso</li>
-          </ul>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">10. Propiedad Intelectual</h2>
-          <p class="text-gray-700 leading-relaxed">
-            El contenido original de este sitio está protegido por derechos de autor. Se permite la visualización y descarga personal, pero no la reproducción comercial sin permiso.
-          </p>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">11. Contacto</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Para consultas legales o preguntas sobre nuestros términos de uso:
-          </p>
-          <ul class="space-y-2 text-gray-700 ml-6">
-            <li>📧 Correo: contacto@example.com</li>
-            <li>🌐 Sitio: https://example.com</li>
-          </ul>
-        </section>
-
-        <section class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">12. Cambios a Este Aviso</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Nos reservamos el derecho de actualizar este Aviso Legal en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación.
-          </p>
-        </section>
+      <div class="space-y-12">
+        {[
+          {
+            num: '1',
+            title: 'Propósito del Sitio',
+            content: 'Web Maker es un sitio web de análisis, comparativas y recomendaciones de productos. Nuestro objetivo es ayudarte a tomar decisiones de compra informadas proporcionando información detallada sobre diversos productos disponibles.'
+          },
+          {
+            num: '2',
+            title: 'Naturaleza del Contenido',
+            content: 'Todo el contenido en nuestro sitio, incluyendo análisis de productos, comparativas, pros, contras y recomendaciones, es proporcionado con fines informativos únicamente. Los contenidos pueden generarse utilizando información técnica, análisis automático y recopilación de datos.'
+          },
+          {
+            num: '3',
+            title: 'Disclaimer de Responsabilidad',
+            content: 'Web Maker NO garantiza la exactitud, completitud, actualización o confiabilidad del contenido del sitio. El contenido se proporciona "tal cual" sin garantías de ningún tipo.',
+            hasList: true,
+            listItems: [
+              'Errores u omisiones en la información de productos',
+              'Cambios en precios, disponibilidad o características de productos',
+              'Daños o perjuicios resultantes del uso de este sitio',
+              'La calidad o desempeño de los productos comprados',
+              'Decisiones de compra basadas en nuestras recomendaciones'
+            ]
+          },
+          {
+            num: '4',
+            title: 'Enlaces de Afiliados',
+            content: 'Cuando haces clic en un enlace de producto y compras, nosotros recibimos una comisión. Esto NO afecta el precio que pagas. Nuestras recomendaciones se basan en análisis objetivo.'
+          },
+          {
+            num: '5',
+            title: 'Independencia Editorial',
+            content: 'Nuestro sitio es independiente. Aunque participamos en programas de afiliados, esto no afecta nuestros criterios de selección y análisis de productos.'
+          },
+          {
+            num: '6',
+            title: 'Limitación de Responsabilidad',
+            content: 'En la máxima medida permitida por la ley, Web Maker no será responsable de daños resultantes del uso o la imposibilidad de usar el sitio.'
+          },
+          {
+            num: '7',
+            title: 'Propiedad Intelectual',
+            content: 'El contenido original de este sitio está protegido por derechos de autor. Se permite la visualización personal, pero no la reproducción comercial sin permiso.'
+          }
+        ].map((section) => (
+          <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start gap-4 mb-4">
+              <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">
+                {section.num}
+              </span>
+              <h2 class="text-2xl font-bold text-gray-900">{section.title}</h2>
+            </div>
+            <p class="text-gray-700 leading-relaxed ml-14 mb-4">{section.content}</p>
+            {section.hasList && (
+              <ul class="ml-14 space-y-3">
+                {section.listItems?.map((item) => (
+                  <li class="flex items-start gap-3 text-gray-700">
+                    <span class="text-red-500 font-bold mt-0.5">✗</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))}
       </div>
     </div>
   </main>
+
+  <Footer />
 </BaseLayout>
 </body>
 </html>

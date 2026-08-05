@@ -4,111 +4,152 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 const title = 'Disclaimer de Afiliados - Web Maker';
-const description = 'Disclaimer del programa de afiliados de Web Maker. Declaración de transparencia sobre nuestras relaciones comerciales.';
+const description = 'Información de transparencia sobre nuestro programa de afiliados de Amazon y cómo monetizamos el sitio.';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
   <Header />
 
-  <main class="bg-white">
-    <div class="container mx-auto px-6 max-w-4xl py-16">
-      <h1 class="text-5xl font-bold text-gray-900 mb-4">Disclaimer de Afiliados</h1>
-      <p class="text-gray-600 text-sm mb-12">Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+  <main class="flex-grow bg-gray-50">
+    {/* Breadcrumbs */}
+    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto w-full px-6 py-4 text-sm text-gray-500">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-[var(--primary)] transition-colors">Inicio</a></li>
+        <li>/</li>
+        <li class="text-gray-900 font-medium" aria-current="page">Disclaimer de Afiliados</li>
+      </ol>
+    </nav>
 
-      {/* Banner destacado */}
-      <div class="bg-blue-50 border-2 border-blue-400 p-8 rounded-lg mb-12">
-        <h2 class="text-2xl font-bold text-blue-900 mb-4">Declaración de Transparencia</h2>
-        <p class="text-blue-900 text-lg">
-          <strong>Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</strong>
+    {/* Hero Section */}
+    <div class="hero-gradient text-white rounded-[var(--radius)] shadow-lg max-w-5xl mx-auto w-full px-6 mb-12 p-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Transparencia de Afiliados</h1>
+      <p class="text-lg opacity-90">Cómo monetizamos Web Maker y cómo esto afecta a nuestras recomendaciones</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 pb-20">
+      
+      {/* Última actualización */}
+      <p class="text-gray-600 text-sm mb-12">
+        Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+
+      {/* Aviso importante */}
+      <div class="bg-amber-50 border-l-4 border-[var(--accent)] p-6 rounded-[var(--radius)] mb-12 shadow-sm">
+        <h2 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+          <span>⚡</span> Información Crucial
+        </h2>
+        <p class="text-amber-900 text-sm">
+          Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Esto NO afecta el precio que pagas.
         </p>
       </div>
 
-      <div class="space-y-12 text-gray-700">
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">1. ¿Qué es un Programa de Afiliados?</h2>
-          <p class="leading-relaxed">
-            Un programa de afiliados es un acuerdo comercial donde ganamos una comisión cuando los lectores compran productos a través de nuestros enlaces. Esto nos permite financiar el sitio y continuar creando contenido de calidad.
+      {/* Contenido */}
+      <div class="space-y-8">
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">1</span>
+            <h2 class="text-2xl font-bold text-gray-900">¿Qué es un Afiliado?</h2>
+          </div>
+          <p class="text-gray-700 leading-relaxed ml-14">
+            Web Maker participa en el Programa de Asociados de Amazon Services LLC. Esto significa que cuando haces clic en un enlace de producto y realizas una compra, Amazon nos paga una comisión sobre esa venta. Esta comisión no se suma al precio que tú pagas.
           </p>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">2. Programas en los que Participamos</h2>
-          <ul class="space-y-3 ml-6 list-disc">
-            <li>Amazon Associates Program</li>
-            <li>Otros programas de afiliados seleccionados</li>
-          </ul>
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">2</span>
+            <h2 class="text-2xl font-bold text-gray-900">Cómo Monitorizamos el Sitio</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">Utilizamos estos ingresos para:</p>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Mantener y mejorar el sitio web</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Crear contenido de calidad y análisis detallados</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Investigar y probar productos</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Pagar por infraestructura y hosting</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Mejorar la experiencia del usuario</li>
+            </ul>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">3. Cómo Funciona</h2>
-          <p class="leading-relaxed mb-4">
-            Cuando haces clic en nuestros enlaces y completas una compra:
-          </p>
-          <ul class="space-y-2 ml-6 list-disc">
-            <li>Recibimos una comisión de la venta</li>
-            <li><strong>Tú NO pagas más</strong> - el precio es el mismo que si compraras directamente</li>
-            <li>La comisión viene de los márgenes de la plataforma, no de tu pago</li>
-          </ul>
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">3</span>
+            <h2 class="text-2xl font-bold text-gray-900">Independencia Editorial</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">Es importante saber que:</p>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 font-bold mt-1">✓</span>
+                <div>
+                  <strong>Nuestras recomendaciones son objetivas:</strong> Seleccionamos productos basándonos en características, precio, calidad y opiniones de usuarios, no en comisiones.
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 font-bold mt-1">✓</span>
+                <div>
+                  <strong>Sin influencia de terceros:</strong> Ningún fabricante o vendedor nos influye o nos paga para recomendar sus productos.
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-600 font-bold mt-1">✓</span>
+                <div>
+                  <strong>Análisis verificados:</strong> Utilizamos datos reales, reseñas verificadas y especificaciones técnicas.
+                </div>
+              </li>
+            </ul>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">4. Nuestro Compromiso</h2>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Nuestras recomendaciones se basan en análisis independiente y objetivo</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>No recomendamos un producto solo porque ofrezca mayores comisiones</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Somos transparentes sobre nuestras relaciones comerciales</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-600 font-bold">✓</span>
-              <span>Tu confianza es más valiosa que cualquier comisión</span>
-            </li>
-          </ul>
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">4</span>
+            <h2 class="text-2xl font-bold text-gray-900">Cómo Afecta a Ti</h2>
+          </div>
+          <div class="ml-14">
+            <p class="text-gray-700 mb-4">La buena noticia es que esto NO te afecta negativamente:</p>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Los precios que ves en Amazon son exactamente los mismos</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> No pagas comisión adicional alguna</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Recibes los mismos beneficios de Prime si eres miembro</li>
+              <li class="flex items-center gap-2"><span class="text-[var(--primary)]">•</span> Las garantías y políticas de Amazon aplican igual</li>
+            </ul>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">5. Conflictos de Intereses</h2>
-          <p class="leading-relaxed">
-            Reconocemos que participar en programas de afiliados crea un incentivo financiero. Para mitigar esto:
-          </p>
-          <ul class="space-y-2 ml-6 list-disc mt-4">
-            <li>Usamos criterios de selección estrictos e imparciales</li>
-            <li>Comparamos productos de manera justa, incluso si algunos tienen menores comisiones</li>
-            <li>Incluimos descargos de responsabilidad claros en todas las páginas relevantes</li>
-          </ul>
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">5</span>
+            <h2 class="text-2xl font-bold text-gray-900">Declaración Legal</h2>
+          </div>
+          <div class="ml-14 space-y-4 text-gray-700">
+            <p>
+              <strong>Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</strong>
+            </p>
+            <p>
+              Web Maker es una entidad independiente y no está afiliada, respaldada ni patrocinada por Amazon o sus afiliados, excepto por el Programa de Asociados de Amazon.
+            </p>
+            <p>
+              Todos los logos y marcas mencionados pertenecen a sus respectivos propietarios.
+            </p>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">6. No nos Hace Falta Recomendar Malos Productos</h2>
-          <p class="leading-relaxed">
-            Nuestro modelo de negocio depende de tu satisfacción. Si recomendamos un mal producto:
-          </p>
-          <ul class="space-y-2 ml-6 list-disc mt-4">
-            <li>Pierdes confianza en nosotros</li>
-            <li>Dejas de visitar nuestro sitio</li>
-            <li>La comisión a corto plazo no vale el daño a largo plazo</li>
-          </ul>
+        <section class="bg-white rounded-[var(--radius)] border border-gray-100 p-8 shadow-sm">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-[var(--primary)] text-white font-bold rounded-full flex-shrink-0 text-sm">6</span>
+            <h2 class="text-2xl font-bold text-gray-900">Contacto</h2>
+          </div>
+          <div class="ml-14 space-y-3 text-gray-700">
+            <p>Si tienes preguntas sobre nuestro programa de afiliados:</p>
+            <div class="space-y-2">
+              <p class="flex items-center gap-2"><span>📧</span> <a href="mailto:contacto@example.com" class="text-[var(--primary)] hover:underline">contacto@example.com</a></p>
+              <p class="flex items-center gap-2"><span>🌐</span> <span>https://www.losmejores5.com</span></p>
+            </div>
+          </div>
         </section>
-
-        <section>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">7. Contacto y Reportar Problemas</h2>
-          <p class="leading-relaxed">
-            Si crees que hemos recomendado un producto de manera desgenerada o identificas un conflicto de intereses, por favor contacta:
-          </p>
-          <p class="mt-4">📧 contacto@example.com</p>
-        </section>
-      </div>
-
-      <div class="mt-16 pt-8 border-t border-gray-200 text-center text-gray-600">
-        <p>© 2026 Web Maker - Todos los derechos reservados</p>
       </div>
     </div>
   </main>

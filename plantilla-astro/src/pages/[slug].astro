@@ -10,7 +10,6 @@ interface Props {
   slug: string;
 }
 
-// Generar rutas estáticas leyendo directamente los archivos JSON
 export async function getStaticPaths() {
   try {
     const nichesDir = path.join(process.cwd(), 'src', 'content', 'niches');
@@ -34,14 +33,10 @@ export async function getStaticPaths() {
       
       return {
         params: { slug },
-        props: {
-          content: content,
-          slug: slug
-        }
+        props: { content, slug }
       };
     });
     
-    console.log(`Generadas ${paths.length} rutas estáticas desde JSON`);
     return paths;
   } catch (error) {
     console.error('Error en getStaticPaths:', error);
@@ -50,319 +45,247 @@ export async function getStaticPaths() {
 }
 
 const { content, slug } = Astro.props;
-
-// Meta etiquetas dinámicas
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Extraer el mejor producto para la sección "Top Pick" (asumiendo que es el primero)
+const bestProduct = content.products && content.products.length > 0 ? content.products[0] : null;
+
+// Iconos dinámicos para los criterios de compra (GEO visual)
+const criteriaIcons = ['⚡', '🛡️', '💰', '🔋', '⭐', '🔧', '📊'];
+
+// Generación de Schema Markup (JSON-LD) para GEO
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL.toString()
+  },
+  "headline": content.title,
+  "description": content.description,
+  "author": {
+    "@type": "Organization",
+    "name": "Equipo Editorial",
+    "url": Astro.site
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": Astro.site
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Comparativas",
+      "item": new URL("/comparativas", Astro.site).toString()
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": content.title,
+      "item": canonicalURL.toString()
+    }
+  ]
+};
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
-    <!-- Meta esenciales -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#667eea" />
+    <meta name="theme-color" content="#4F46E5" />
     
-    <!-- SEO -->
-    <title>{content.title}</title>
+    <!-- SEO & Metadatos -->
+    <title>{content.title} | Opiniones y Guía 2026</title>
     <meta name="description" content={content.description} />
-    <meta property="og:title" content={content.title} />
-    <meta property="og:description" content={content.description} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    
     <link rel="canonical" href={canonicalURL} />
     
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content={content.title} />
+    <meta property="og:description" content={content.description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema Markup (GEO) -->
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+    
+    <style is:global>
+      /* Design Tokens exigidos por las instrucciones */
+      :root {
+        --primary: #6366F1;
+        --primary-dark: #4F46E5;
+        --accent: #F59E0B;
+        --background: #F8FAFC;
+        --surface: #FFFFFF;
+        --text: #111827;
+        --text-muted: #6B7280;
+        --border: #E5E7EB;
+        --success: #10B981;
+        --radius: 16px;
       }
-      
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        padding: 20px;
+        background-color: var(--background);
+        color: var(--text);
       }
-      
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      
-      header {
-        text-align: center;
-        color: white;
-        padding: 60px 20px 40px;
-      }
-      
-      header h1 {
-        font-size: clamp(1.8rem, 5vw, 3rem);
-        margin-bottom: 15px;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      
-      header p {
-        font-size: 1.1rem;
-        opacity: 0.95;
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
-      
-      .affiliate-disclaimer {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 15px 20px;
-        margin: 30px 0;
-        border-radius: 4px;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: #856404;
-      }
-      
-      .intro-section {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        border-radius: 12px;
-        margin: 30px 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        line-height: 1.8;
-        color: #333;
-      }
-      
-      .intro-section h2 {
-        color: #667eea;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-      }
-      
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 25px;
-        margin: 40px 0;
-      }
-      
-      .comparison-section {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        border-radius: 12px;
-        margin: 30px 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-      
-      .comparison-section h2 {
-        color: #667eea;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-      }
-      .criteria-section {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 20px 25px;
-        border-radius: 12px;
-        margin: 25px 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      .criteria-section h2 {
-        color: #667eea;
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-      }
-
-      .criteria-intro {
-        color: #6b7280;
-        margin-bottom: 12px;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-
-      .criteria-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 12px;
-        margin-top: 10px;
-      }
-
-      .criteria-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 12px 10px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-      }
-
-      .criteria-card:hover {
-        border-color: #667eea;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
-        transform: translateY(-2px);
-      }
-
-      .criteria-number {
-        width: 35px;
-        height: 35px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 6px;
-      }
-
-      .criteria-text {
-        color: #374151;
-        font-weight: 500;
-        line-height: 1.3;
-        font-size: 0.8rem;
-      }
-      
-      .verdict-section {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        border-radius: 12px;
-        margin: 30px 0;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-      
-      .verdict-section h2 {
-        color: #667eea;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-      }
-      
-      footer {
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 40px 20px;
-        margin-top: 60px;
-        text-align: center;
-        font-size: 0.9rem;
-        line-height: 1.8;
-      }
-      
-      .breadcrumb {
-        color: white;
-        padding: 10px 0;
-        font-size: 0.9rem;
-        opacity: 0.9;
-      }
-      
-      .breadcrumb a {
-        color: white;
-        text-decoration: none;
-      }
-      
-      .breadcrumb a:hover {
-        text-decoration: underline;
-      }
-      
-      @media (max-width: 768px) {
-        header {
-          padding: 40px 20px 30px;
-        }
-        
-        header h1 {
-          font-size: 1.8rem;
-        }
-        
-        .intro-section,
-        .criteria-section,
-        .comparison-section,
-        .verdict-section {
-          padding: 25px;
-        }
-
-        .criteria-grid {
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap: 10px;
-        }
-
-        .criteria-card {
-          padding: 10px 8px;
-        }
-
-        .criteria-number {
-          width: 30px;
-          height: 30px;
-          font-size: 0.9rem;
-        }
-
-        .criteria-text {
-          font-size: 0.75rem;
-        }
-        
-        .products-grid {
-          grid-template-columns: 1fr;
-        }
+      .hero-gradient {
+        background: linear-gradient(135deg, #5B7CFF, #7F5AF0);
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="breadcrumb">
-        <a href="/">← Volver a inicio</a>
-      </div>
-      
-      <header>
-        <h1>{content.title}</h1>
-        <p>{content.description}</p>
-      </header>
-      
-      <div class="affiliate-disclaimer">
-        <strong>⚠️ Descargo de responsabilidad:</strong> Los enlaces de esta página son enlaces de afiliado. 
-        Si realiza una compra a través de ellos, recibimos una comisión sin costo adicional para usted. 
-        Esto nos ayuda a mantener este sitio.
-      </div>
-      
-      <section class="intro-section">
-        <h2>Introducción</h2>
-        <p>{content.intro}</p>
-      </section>
-
-      {content.buying_criteria && content.buying_criteria.length > 0 && (
-        <section class="criteria-section">
-          <h2>Criterios de Clasificación</h2>
-          <p class="criteria-intro">Hemos evaluado cada producto teniendo en cuenta estos 5 criterios clave:</p>
-          <div class="criteria-grid">
-            {content.buying_criteria.map((criterion: string, index: number) => (
-              <div class="criteria-card">
-                <div class="criteria-number">{index + 1}</div>
-                <div class="criteria-text">{criterion}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-      
-      <section class="comparison-section">
-        <h2>Comparativa de Productos</h2>
-        {content.products && content.products.length > 0 && <ComparisonTable products={content.products} />}
-      </section>
-      
-      <section class="verdict-section">
-        <h2>Veredicto Final</h2>
-        <p>{content.verdict}</p>
-      </section>
-      
-      <footer>
-        <p><strong>© 2024 Web Maker - Generador de Páginas de Nicho</strong></p>
-        <p>Generas páginas de afiliados automáticamente con IA</p>
-        <p style="margin-top: 15px; opacity: 0.8;">
-          Este sitio participa en programas de afiliados. Recibimos una comisión por las compras realizadas 
-          a través de nuestros enlaces sin costo adicional para el usuario.
-        </p>
-      </footer>
+  
+  <body class="font-sans antialiased text-gray-900 bg-[#F8FAFC] flex flex-col min-h-screen">
+    
+    <!-- Banner de Transparencia Compacto (Cumplimiento Amazon) -->
+    <div class="bg-gray-100 border-b border-gray-200 text-xs text-gray-500 py-2 px-4 text-center">
+      <span class="inline-flex items-center gap-1 max-w-4xl mx-auto">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        <strong>Transparencia:</strong> Como afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.
+      </span>
     </div>
+
+    <!-- Navegación Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto w-full px-4 py-4 text-sm text-gray-500">
+      <ol class="flex items-center gap-2">
+        <li><a href="/" class="hover:text-[var(--primary)] transition-colors">Inicio</a></li>
+        <li>/</li>
+        <li><a href="/comparativas" class="hover:text-[var(--primary)] transition-colors">Comparativas</a></li>
+        <li>/</li>
+        <li class="text-gray-900 font-medium truncate" aria-current="page">{content.title}</li>
+      </ol>
+    </nav>
+
+    <main class="flex-grow">
+      <article class="max-w-5xl mx-auto w-full px-4 pb-20">
+        
+        <!-- Hero Section -->
+        <header class="hero-gradient text-white rounded-[var(--radius)] p-8 md:p-12 mb-10 text-center shadow-lg">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            {content.title}
+          </h1>
+          <p class="text-lg md:text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+            {content.description}
+          </p>
+        </header>
+
+        <!-- TOC y Contenido Layout -->
+        <div class="flex flex-col lg:flex-row gap-10">
+          
+          <!-- Contenido Principal -->
+          <div class="lg:w-3/4 space-y-12">
+            
+            <!-- Resumen Ejecutivo / Intro -->
+            <section id="introduccion" class="prose prose-lg prose-indigo max-w-none text-gray-700">
+              <p class="text-lg leading-relaxed">{content.intro}</p>
+            </section>
+
+            <!-- Sección: Top Pick (El Producto Recomendado) -->
+            {bestProduct && (
+              <section id="mejor-eleccion" class="bg-white rounded-[var(--radius)] border border-[var(--primary)] p-1 shadow-md">
+                <div class="bg-indigo-50 rounded-[calc(var(--radius)-4px)] p-6 md:p-8 relative">
+                  <div class="absolute -top-4 left-6 bg-[var(--primary)] text-white text-sm font-bold uppercase tracking-wide py-1 px-4 rounded-full shadow-sm flex items-center gap-2">
+                    🏆 Nuestra Elección
+                  </div>
+                  <h2 class="text-2xl font-bold text-gray-900 mt-2 mb-4">El mejor modelo en general</h2>
+                  <p class="text-gray-700 mb-6">Después de analizar las métricas técnicas y las opiniones verificadas, esta es la recomendación definitiva de nuestro equipo editorial por su balance entre calidad, rendimiento y precio.</p>
+                  
+                  <!-- Aquí deberías inyectar el componente visual de tu Top Pick real -->
+                  <!-- <TopPick product={bestProduct} /> -->
+                </div>
+              </section>
+            )}
+
+            <!-- Tabla Comparativa HTML Pura (Optimización GEO) -->
+            <section id="comparativa" class="scroll-mt-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">Comparativa Rápida</h2>
+              {content.products && content.products.length > 0 && (
+                <div class="bg-white rounded-[var(--radius)] p-6 shadow-sm border border-gray-100 overflow-x-auto">
+                  <ComparisonTable products={content.products} />
+                </div>
+              )}
+            </section>
+
+            <!-- Criterios de Compra (Iconografía) -->
+            {content.buying_criteria && content.buying_criteria.length > 0 && (
+              <section id="criterios" class="bg-white rounded-[var(--radius)] p-8 shadow-sm border border-gray-100 scroll-mt-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Criterios de Evaluación</h2>
+                <p class="text-gray-500 mb-8">Cómo clasificamos y puntuamos estos productos:</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {content.buying_criteria.map((criterion: string, index: number) => (
+                    <div class="flex flex-col items-center text-center p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all duration-300 group">
+                      <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+                        {criteriaIcons[index % criteriaIcons.length]}
+                      </div>
+                      <h3 class="text-sm font-semibold text-gray-800">{criterion}</h3>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <!-- Veredicto Final -->
+            <section id="veredicto" class="bg-gray-900 text-white rounded-[var(--radius)] p-8 md:p-10 shadow-xl scroll-mt-8 relative overflow-hidden">
+              <!-- Decoración de fondo -->
+              <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-indigo-600 rounded-full blur-3xl opacity-20"></div>
+              
+              <h2 class="text-3xl font-bold mb-4 relative z-10">Veredicto Final</h2>
+              <p class="text-lg text-gray-300 leading-relaxed relative z-10">
+                {content.verdict}
+              </p>
+            </section>
+          </div>
+
+          <!-- Barra Lateral (Desktop Nav / Sticky TOC) -->
+          <aside class="hidden lg:block lg:w-1/4">
+            <div class="sticky top-8 bg-white p-6 rounded-[var(--radius)] shadow-sm border border-gray-100">
+              <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">En este artículo</h3>
+              <ul class="space-y-3 text-sm text-gray-600">
+                <li><a href="#introduccion" class="hover:text-[var(--primary)] transition-colors">Resumen</a></li>
+                {bestProduct && (
+                  <li><a href="#mejor-eleccion" class="hover:text-[var(--primary)] transition-colors">Nuestra Elección</a></li>
+                )}
+                <li><a href="#comparativa" class="hover:text-[var(--primary)] transition-colors">Tabla Comparativa</a></li>
+                <li><a href="#criterios" class="hover:text-[var(--primary)] transition-colors">Criterios de Evaluación</a></li>
+                <li><a href="#veredicto" class="hover:text-[var(--primary)] transition-colors">Veredicto Final</a></li>
+              </ul>
+            </div>
+          </aside>
+
+        </div>
+      </article>
+    </main>
+    
+    <!-- Footer Editorial Profesional -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+      <div class="max-w-5xl mx-auto px-4 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-center md:text-left">
+            <p class="font-bold text-gray-900 text-xl tracking-tight">Editorial<span class="text-[var(--primary)]">Reviews</span></p>
+            <p class="text-sm text-gray-500 mt-2">Guías de compra objetivas y basadas en datos.</p>
+          </div>
+          <nav aria-label="Footer Navigation">
+            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-600">
+              <li><a href="/aviso-legal" class="hover:text-gray-900 transition-colors">Aviso Legal</a></li>
+              <li><a href="/politica-de-privacidad" class="hover:text-gray-900 transition-colors">Privacidad</a></li>
+              <li><a href="/disclaimer-afiliados" class="hover:text-gray-900 transition-colors">Transparencia</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="mt-8 pt-8 border-t border-gray-100 text-center text-sm text-gray-500">
+          <p>© 2026 EditorialReviews. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+    
   </body>
 </html>

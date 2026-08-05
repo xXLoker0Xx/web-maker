@@ -48,43 +48,37 @@ const description = 'Guías de compra y comparativas de productos de calidad. An
     {/* Stats Section */}
     <section class="py-16 bg-white">
       <div class="container mx-auto px-6 max-w-6xl">
-        <div class="grid md:grid-cols-3 gap-8 text-center">
-          <div class="p-8">
-            <div class="text-5xl font-bold text-blue-600 mb-2">{totalNiches}</div>
-            <p class="text-gray-600 text-lg">Categorías Analizadas</p>
-          </div>
-          <div class="p-8">
-            <div class="text-5xl font-bold text-blue-600 mb-2">{totalProducts}</div>
-            <p class="text-gray-600 text-lg">Productos Comparados</p>
-          </div>
-          <div class="p-8">
-            <div class="text-5xl font-bold text-blue-600 mb-2">100%</div>
-            <p class="text-gray-600 text-lg">Análisis Independiente</p>
-          </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          {[
+            { value: totalNiches, label: 'Categorías Analizadas' },
+            { value: totalProducts, label: 'Productos Comparados' },
+            { value: '100%', label: 'Análisis Independiente' }
+          ].map((stat) => (
+            <div class="p-8 bg-gray-50 rounded-[var(--radius)] border border-gray-100 hover:shadow-md transition-shadow text-center group">
+              <div class="text-5xl font-bold text-[var(--primary)] mb-3 group-hover:scale-110 transition-transform">{stat.value}</div>
+              <p class="text-gray-600 text-lg font-medium">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
     {/* Por qué confiar en nosotros */}
     <section class="py-16 bg-gray-50">
-      <div class="container mx-auto px-6 max-w-4xl">
-        <h2 class="text-4xl font-bold text-center mb-12">¿Por qué Confiar en Nosotros?</h2>
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">¿Por qué Confiar en Nosotros?</h2>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="text-4xl mb-4">🔍</div>
-            <h3 class="text-xl font-bold mb-2">Análisis Detallado</h3>
-            <p class="text-gray-600">Investigamos cada producto a fondo para ofrecerte información completa y honesta.</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl mb-4">⭐</div>
-            <h3 class="text-xl font-bold mb-2">Opiniones Reales</h3>
-            <p class="text-gray-600">Basamos nuestras recomendaciones en miles de reseñas y datos verificados.</p>
-          </div>
-          <div class="text-center">
-            <div class="text-4xl mb-4">✓</div>
-            <h3 class="text-xl font-bold mb-2">Sin Sesgos</h3>
-            <p class="text-gray-600">Nuestras evaluaciones son independientes y nunca están influenciadas por intereses comerciales.</p>
-          </div>
+          {[
+            { icon: '🔍', title: 'Análisis Detallado', desc: 'Investigamos cada producto a fondo para ofrecerte información completa y honesta.' },
+            { icon: '⭐', title: 'Opiniones Reales', desc: 'Basamos nuestras recomendaciones en miles de reseñas y datos verificados.' },
+            { icon: '✓', title: 'Sin Sesgos', desc: 'Nuestras evaluaciones son independientes y nunca están influenciadas por intereses comerciales.' }
+          ].map((item) => (
+            <div class="p-8 bg-white rounded-[var(--radius)] border border-gray-100 shadow-sm hover:shadow-md hover:border-[var(--primary)] transition-all duration-300 text-center">
+              <div class="text-5xl mb-4">{item.icon}</div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+              <p class="text-gray-600 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -92,48 +86,62 @@ const description = 'Guías de compra y comparativas de productos de calidad. An
     {/* Niches Grid */}
     <section id="niches" class="py-20 bg-white">
       <div class="container mx-auto px-6 max-w-6xl">
-        <h2 class="text-4xl font-bold text-center mb-4">Explora Nuestras Comparativas</h2>
-        <p class="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
-          Selecciona una categoría para ver análisis detallados, comparativas y recomendaciones de los mejores productos.
-        </p>
+        <div class="mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">Explora Nuestras Comparativas</h2>
+          <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+            Selecciona una categoría para ver análisis detallados, comparativas y recomendaciones de los mejores productos.
+          </p>
+        </div>
 
         {nichesArray.length > 0 ? (
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {nichesArray.map((niche) => (
               <a
                 href={`/${niche.slug}/`}
-                class="group relative p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300"
+                class="group relative overflow-hidden bg-white rounded-[var(--radius)] border border-gray-100 shadow-sm hover:shadow-md hover:border-[var(--primary)] transition-all duration-300 p-8"
               >
-                <div class="absolute top-4 right-4 text-3xl opacity-20 group-hover:opacity-100 transition-opacity">
-                  →
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-2 pr-8">{niche.title}</h3>
-                <p class="text-gray-700 mb-4">{niche.description}</p>
-                <div class="flex items-center gap-2 text-blue-600 font-semibold">
-                  <span class="bg-blue-100 text-blue-900 px-3 py-1 rounded-lg text-sm">📦 {niche.count} productos</span>
+                {/* Gradient overlay on hover */}
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                  <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 pr-6 group-hover:text-[var(--primary)] transition-colors">{niche.title}</h3>
+                    <span class="text-2xl text-gray-400 group-hover:text-[var(--primary)] group-hover:scale-125 transition-all flex-shrink-0">→</span>
+                  </div>
+                  
+                  <p class="text-gray-600 mb-6 flex-grow text-sm leading-relaxed">{niche.description}</p>
+                  
+                  <div class="inline-flex items-center gap-2">
+                    <span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">
+                      📦 {niche.count} {niche.count === 1 ? 'producto' : 'productos'}
+                    </span>
+                  </div>
                 </div>
               </a>
             ))}
           </div>
         ) : (
-          <div class="text-center py-20">
+          <div class="text-center py-20 bg-gray-50 rounded-[var(--radius)] border border-gray-100">
             <p class="text-2xl font-bold text-gray-900 mb-4">📋 Sin comparativas aún</p>
-            <p class="text-gray-600">Ejecuta <code class="bg-gray-100 px-2 py-1 rounded">python main.py</code> para generar tu primera página</p>
+            <p class="text-gray-600">Ejecuta <code class="bg-gray-200 px-2 py-1 rounded text-sm">python main.py</code> para generar tu primera página</p>
           </div>
         )}
       </div>
     </section>
 
     {/* CTA Final */}
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-      <div class="container mx-auto px-6 max-w-4xl text-center">
-        <h2 class="text-4xl font-bold mb-6">¿Necesitas Ayuda para Elegir?</h2>
-        <p class="text-xl mb-8 text-blue-100">
+    <section class="py-20 bg-gradient-to-r from-[var(--primary)] to-indigo-600 text-white relative overflow-hidden">
+      {/* Decoración de fondo */}
+      <div class="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+      
+      <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">¿Necesitas Ayuda para Elegir?</h2>
+        <p class="text-lg md:text-xl mb-10 text-white/90 leading-relaxed">
           Nuestras guías de compra están diseñadas para simplificar tu decisión. Explora nuestras comparativas hoy.
         </p>
         <a
           href="#niches"
-          class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:shadow-lg hover:scale-105 transition-all duration-300"
+          class="inline-block bg-white text-[var(--primary)] px-8 py-4 rounded-[var(--radius)] font-bold hover:shadow-xl hover:scale-105 transition-all duration-300"
         >
           Ver Todas las Comparativas
         </a>
