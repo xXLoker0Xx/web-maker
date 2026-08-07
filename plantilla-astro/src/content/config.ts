@@ -30,6 +30,14 @@ const nichesCollection = defineCollection({
       rating: z.number().optional(),
       reviews_count: z.number().optional(),
       affiliate_url: z.string().optional(),
+      ideal_for: z.string().optional(),
+      avoid_if: z.string().optional(),
+      best_use_case: z.string().optional(),
+      key_features: z.array(z.string()).optional(),
+      score: z.number().optional(),
+      value_score: z.number().optional(),
+      performance_score: z.number().optional(),
+      expert_tip: z.string().optional(),
     })).optional(),
   }),
 });
@@ -67,4 +75,12 @@ export interface Product {
   rating?: number;
   reviews_count?: number;
   affiliate_url?: string;
+  ideal_for?: string;
+  avoid_if?: string;
+  best_use_case?: string;
+  key_features?: string[];
+  score?: number;
+  value_score?: number;
+  performance_score?: number;
+  expert_tip?: string;
 }

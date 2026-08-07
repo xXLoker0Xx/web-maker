@@ -1,0 +1,140 @@
+---
+// ProductSuitability.astro - Componente para mostrar para quién es y para quién no
+// Renderiza secciones "Ideal Para" y "Evitar Si"
+
+interface Props {
+  ideal_for?: string;
+  avoid_if?: string;
+  best_use_case?: string;
+}
+
+const { ideal_for, avoid_if, best_use_case } = Astro.props;
+---
+
+{(ideal_for || avoid_if || best_use_case) && (
+  <div class="suitability-container">
+    {ideal_for && (
+      <div class="suitability-item ideal">
+        <span class="suitability-icon">✓</span>
+        <div class="suitability-content">
+          <h4 class="suitability-label">Ideal Para</h4>
+          <p class="suitability-text">{ideal_for}</p>
+        </div>
+      </div>
+    )}
+
+    {best_use_case && (
+      <div class="suitability-item usecase">
+        <span class="suitability-icon">🎯</span>
+        <div class="suitability-content">
+          <h4 class="suitability-label">Mejor Caso de Uso</h4>
+          <p class="suitability-text">{best_use_case}</p>
+        </div>
+      </div>
+    )}
+
+    {avoid_if && (
+      <div class="suitability-item avoid">
+        <span class="suitability-icon">⚠</span>
+        <div class="suitability-content">
+          <h4 class="suitability-label">Evita Si</h4>
+          <p class="suitability-text">{avoid_if}</p>
+        </div>
+      </div>
+    )}
+  </div>
+)}
+
+<style>
+  .suitability-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .suitability-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+  }
+
+  .suitability-item.ideal {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+  }
+
+  .suitability-item.ideal:hover {
+    background: #d1fae5;
+    border-color: #6ee7b7;
+  }
+
+  .suitability-item.usecase {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+  }
+
+  .suitability-item.usecase:hover {
+    background: #dbeafe;
+    border-color: #93c5fd;
+  }
+
+  .suitability-item.avoid {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .suitability-item.avoid:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+  }
+
+  .suitability-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .suitability-content {
+    flex: 1;
+  }
+
+  .suitability-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #374151;
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .suitability-text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .suitability-container {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .suitability-item {
+      padding: 0.6rem;
+      gap: 0.6rem;
+    }
+
+    .suitability-label {
+      font-size: 0.7rem;
+    }
+
+    .suitability-text {
+      font-size: 0.8rem;
+    }
+  }
+</style>

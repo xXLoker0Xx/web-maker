@@ -1,0 +1,85 @@
+---
+// KeyFeatures.astro - Componente para mostrar características principales
+// Renderiza una lista de características clave del producto
+
+interface Props {
+  features?: string[];
+}
+
+const { features } = Astro.props;
+---
+
+{features && features.length > 0 && (
+  <div class="key-features-container">
+    <h4 class="key-features-title">⭐ Características Principales</h4>
+    <ul class="key-features-list">
+      {features.map((feature) => (
+        <li class="key-feature-item">{feature}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .key-features-container {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: #f3f4f6;
+    border-radius: 12px;
+    border-left: 4px solid #f59e0b;
+  }
+
+  .key-features-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .key-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .key-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #4b5563;
+    padding: 0.5rem 0.75rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+  }
+
+  .key-feature-item::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .key-features-container {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .key-features-list {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .key-feature-item {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+    }
+  }
+</style>

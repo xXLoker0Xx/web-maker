@@ -1,0 +1,74 @@
+---
+// ExpertTip.astro - Componente para mostrar recomendaciones de expertos
+// Renderiza un callout destacado con consejo profesional
+
+interface Props {
+  tip?: string;
+}
+
+const { tip } = Astro.props;
+---
+
+{tip && (
+  <div class="expert-tip-container">
+    <div class="expert-tip-icon">💡</div>
+    <div class="expert-tip-content">
+      <h4 class="expert-tip-title">Consejo de Experto</h4>
+      <p class="expert-tip-text">{tip}</p>
+    </div>
+  </div>
+)}
+
+<style>
+  .expert-tip-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 12px;
+    align-items: flex-start;
+  }
+
+  .expert-tip-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .expert-tip-content {
+    flex: 1;
+  }
+
+  .expert-tip-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #78350f;
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .expert-tip-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #92400e;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .expert-tip-container {
+      gap: 0.75rem;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .expert-tip-icon {
+      font-size: 1.25rem;
+    }
+
+    .expert-tip-text {
+      font-size: 0.85rem;
+    }
+  }
+</style>

@@ -2,6 +2,11 @@
 // ProductCard.astro - Componente para mostrar detalles individuales de productos
 // Recibe información del producto y renderiza una tarjeta con diseño profesional
 
+import ScoreDisplay from './ScoreDisplay.astro';
+import ExpertTip from './ExpertTip.astro';
+import ProductSuitability from './ProductSuitability.astro';
+import KeyFeatures from './KeyFeatures.astro';
+
 interface Props {
   asin: string;
   title: string;
@@ -16,6 +21,14 @@ interface Props {
   affiliate_url?: string;
   isRecommended?: boolean;
   ranking?: number;
+  ideal_for?: string;
+  avoid_if?: string;
+  best_use_case?: string;
+  key_features?: string[];
+  score?: number;
+  value_score?: number;
+  performance_score?: number;
+  expert_tip?: string;
 }
 
 const {
@@ -32,6 +45,14 @@ const {
   affiliate_url,
   isRecommended = false,
   ranking,
+  ideal_for,
+  avoid_if,
+  best_use_case,
+  key_features,
+  score,
+  value_score,
+  performance_score,
+  expert_tip,
 } = Astro.props;
 
 // Función para generar estrellas
@@ -106,6 +127,15 @@ const renderStars = (rating: number) => {
     <!-- Resumen -->
     <p class="summary">{summary}</p>
 
+    <!-- Puntuaciones (Nuevo) -->
+    <ScoreDisplay score={score} value_score={value_score} performance_score={performance_score} />
+
+    <!-- Características Principales (Nuevo) -->
+    <KeyFeatures features={key_features} />
+
+    <!-- Idoneidad del Producto (Nuevo) -->
+    <ProductSuitability ideal_for={ideal_for} avoid_if={avoid_if} best_use_case={best_use_case} />
+
     <!-- Pros y Contras -->
     <div class="features-grid">
       <!-- Pros -->
@@ -128,6 +158,9 @@ const renderStars = (rating: number) => {
         </ul>
       </div>
     </div>
+
+    <!-- Consejo de Experto (Nuevo) -->
+    <ExpertTip tip={expert_tip} />
 
     <!-- CTA Button -->
     <a

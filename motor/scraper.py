@@ -9,7 +9,11 @@ import json
 import time
 from typing import List, Dict, Optional, Any
 from urllib.parse import urlencode
-from playwright.sync_api import sync_playwright, Page, TimeoutError as PlaywrightTimeoutError
+
+try:
+    from playwright.sync_api import sync_playwright, Page, TimeoutError as PlaywrightTimeoutError
+except ImportError:
+    raise ImportError("Playwright is required. Install it with: pip install playwright")
 
 
 class AmazonScraper:
@@ -231,7 +235,7 @@ class AmazonScraper:
                     return text
             
             return "N/A"
-        except:
+        except Exception:
             return "N/A"
 
     def _extract_rating_info(self, container) -> tuple:
@@ -260,7 +264,7 @@ class AmazonScraper:
                     reviews_count = int(reviews_match.group(1).replace('.', ''))
             
             return rating, reviews_count
-        except:
+        except Exception:
             return 0.0, 0
 
     def _extract_features_from_preview(self, container) -> List[str]:
@@ -272,14 +276,10 @@ class AmazonScraper:
             if ul_elem:
                 li_elements = ul_elem.query_selector_all('li span')
                 features = [li.text_content().strip() for li in li_elements[:3]]
-        except:
+        except Exception:
             pass
         
         return features
-    
-    def __del__(self):
-        """Cleanup on deletion."""
-        self._close_browser()
     
     def close(self) -> None:
         """Close browser and cleanup."""
