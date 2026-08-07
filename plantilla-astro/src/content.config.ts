@@ -1,8 +1,9 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 // Definir la colección 'niches'
 const nichesCollection = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: '**/*.json', base: './src/content/niches' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -46,41 +47,3 @@ const nichesCollection = defineCollection({
 export const collections = {
   niches: nichesCollection,
 };
-
-// Tipos TypeScript para referencia
-export interface NicheContent {
-  title: string;
-  description: string;
-  intro?: string;
-  verdict?: string;
-  executive_summary?: string;
-  key_takeaways?: string[];
-  buying_guide?: string;
-  buying_criteria?: string[];
-  faq?: Array<{ question: string; answer: string }>;
-  products?: Product[];
-}
-
-export interface Product {
-  asin: string;
-  title: string;
-  short_title?: string;
-  badge?: string;
-  pros?: string[];
-  cons?: string[];
-  summary?: string;
-  highlights?: string[];
-  image_url?: string;
-  price?: string;
-  rating?: number;
-  reviews_count?: number;
-  affiliate_url?: string;
-  ideal_for?: string;
-  avoid_if?: string;
-  best_use_case?: string;
-  key_features?: string[];
-  score?: number;
-  value_score?: number;
-  performance_score?: number;
-  expert_tip?: string;
-}
